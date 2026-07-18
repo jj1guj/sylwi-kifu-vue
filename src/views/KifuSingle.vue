@@ -4,13 +4,13 @@
     <GameSelect
       :tournament="data.tournament"
       :gameid="data.gameid"
-      :gamename="getGameName(data.gameid)"
+      :gamename="getGameName()"
       @change-game="changeGame"
     />
     <Kifu
       :tournament="data.tournament"
       :gameid="data.gameid"
-      :gamename="getGameName(data.gameid)"
+      :gamename="getGameName()"
       :ply="data.ply"
       :lightEnd="true"
       @change-ply="changePly"

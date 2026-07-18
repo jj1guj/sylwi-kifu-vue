@@ -1,3 +1,4 @@
+import castleOrgDataJson from "@/assets/castle/castle.json";
 import { Piece } from "shogi.js";
 import { JKFPlayer } from "json-kifu-format";
 
@@ -138,8 +139,7 @@ export type CastleOrgEntryType = {
 };
 
 export const castleOrgData =
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  require("@/assets/castle/castle.json") as CastleOrgEntryType[];
+  castleOrgDataJson as unknown as CastleOrgEntryType[];
 
 export type CastleEntryType = {
   id: string; // タグ管理名

@@ -35,8 +35,8 @@
         :tournament="props.tournament"
         :gameid="props.gameid"
         :gamename="props.gamename"
-        :kifuurl="data.kifuurl"
-        :kifuorgurl="data.kifuorgurl"
+        :kifuurl="getKifuurl()"
+        :kifuorgurl="getKifuorgurl()"
         @tesuu-change="tesuuChange"
         v-if="!props.hideGraph"
       />
@@ -438,19 +438,19 @@ import Info from "@/components/Kifu/Info.vue";
 import Ban from "@/components/Kifu/Ban.vue";
 import Mochi from "@/components/Kifu/Mochi.vue";
 import TesuuSel from "@/components/Kifu/TesuuSel.vue";
-import iconCaretLeftRaw from "!!raw-loader!@tabler/icons/icons/caret-left.svg";
-import iconChevronsLeftRaw from "!!raw-loader!@tabler/icons/icons/chevrons-left.svg";
-import iconArrowBarToLeftRaw from "!!raw-loader!@tabler/icons/icons/arrow-bar-to-left.svg";
-import iconCaretRightRaw from "!!raw-loader!@tabler/icons/icons/caret-right.svg";
-import iconChevronsRightRaw from "!!raw-loader!@tabler/icons/icons/chevrons-right.svg";
-import iconArrowBarToRightRaw from "!!raw-loader!@tabler/icons/icons/arrow-bar-to-right.svg";
-import iconRotateRaw from "!!raw-loader!@tabler/icons/icons/rotate.svg";
-import iconTwitterRaw from "!!raw-loader!@tabler/icons/icons/brand-twitter.svg";
-import iconCopyRaw from "!!raw-loader!@tabler/icons/icons/copy.svg";
-import iconDownloadRaw from "!!raw-loader!@tabler/icons/icons/download.svg";
-import iconLogoutRaw from "!!raw-loader!@tabler/icons/icons/logout.svg";
-import iconLinkRaw from "!!raw-loader!@tabler/icons/icons/link.svg";
-import iconBrushRaw from "!!raw-loader!@tabler/icons/icons/brush.svg";
+import iconCaretLeftRaw from "@tabler/icons/icons/caret-left.svg?raw";
+import iconChevronsLeftRaw from "@tabler/icons/icons/chevrons-left.svg?raw";
+import iconArrowBarToLeftRaw from "@tabler/icons/icons/arrow-bar-to-left.svg?raw";
+import iconCaretRightRaw from "@tabler/icons/icons/caret-right.svg?raw";
+import iconChevronsRightRaw from "@tabler/icons/icons/chevrons-right.svg?raw";
+import iconArrowBarToRightRaw from "@tabler/icons/icons/arrow-bar-to-right.svg?raw";
+import iconRotateRaw from "@tabler/icons/icons/rotate.svg?raw";
+import iconTwitterRaw from "@tabler/icons/icons/brand-twitter.svg?raw";
+import iconCopyRaw from "@tabler/icons/icons/copy.svg?raw";
+import iconDownloadRaw from "@tabler/icons/icons/download.svg?raw";
+import iconLogoutRaw from "@tabler/icons/icons/logout.svg?raw";
+import iconLinkRaw from "@tabler/icons/icons/link.svg?raw";
+import iconBrushRaw from "@tabler/icons/icons/brush.svg?raw";
 
 export default defineComponent({
   props: {

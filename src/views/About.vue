@@ -19,7 +19,7 @@
           <p>{{ name }}</p>
           <ul>
             <template v-for="(data, key) in license" :key="key">
-              <li v-if="key !== 'path' && key !== 'licenseFile'">
+              <li v-if="key !== 'licenseFile'">
                 {{ key }} : {{ data }}
               </li>
             </template>
@@ -33,13 +33,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PR from "@/components/PR.vue";
+import licenses from "@/assets/licenses.json";
 
 export default defineComponent({
   name: "Home",
   setup(props) {
     return {
       props,
-      licenses: require("@/assets/licenses.json"),
+      licenses,
     };
   },
   components: {

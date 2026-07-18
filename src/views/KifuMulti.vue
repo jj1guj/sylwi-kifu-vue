@@ -159,6 +159,7 @@ export default defineComponent({
   setup(props) {
     const data = reactive({
       show: true,
+      showoption: false,
     });
     const router = useRouter();
     const changeGame = (msg: { tournament: string; gameid: string }) => {
@@ -167,7 +168,6 @@ export default defineComponent({
     return {
       props,
       data,
-      showoption: false,
       changeGame,
       changeQuery: (newprops: Partial<typeof props>): void => {
         const p = Object.assign({}, props, newprops);

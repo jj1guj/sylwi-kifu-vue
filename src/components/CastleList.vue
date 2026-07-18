@@ -8,14 +8,16 @@
             <dt>{{ key }} ({{ keyTips[key] }}) :</dt>
             <dd>{{ cprop }}</dd>
             <dd v-if="key === 'pieces'">
-              {{ cprop.map(conv_readable_pieces) }}
+              {{ mapValues(cprop, conv_readable_pieces) }}
             </dd>
-            <dd v-if="key === 'moves'">{{ cprop.map(conv_readable_moves) }}</dd>
+            <dd v-if="key === 'moves'">
+              {{ mapValues(cprop, conv_readable_moves) }}
+            </dd>
             <dd v-if="key === 'capture'">
-              {{ cprop.map(conv_readable_capture) }}
+              {{ mapValues(cprop, conv_readable_capture) }}
             </dd>
             <dd v-if="key === 'hand' || key === 'hand_exclude'">
-              {{ cprop.map(conv_readable_hand) }}
+              {{ mapValues(cprop, conv_readable_hand) }}
             </dd>
           </template>
         </template>
@@ -62,9 +64,15 @@ import {
 export default defineComponent({
   props: {},
   setup(props) {
+    const mapValues = (
+      value: unknown,
+      formatter: (value: string) => string
+    ): string[] => (Array.isArray(value) ? value.map(formatter) : []);
+
     return {
       props,
       castleOrgData,
+      mapValues,
       keyTips: {
         pieces: "盤上の駒[AND条件]",
         hand: "駒台の駒[AND条件]",
@@ -76,10 +84,11 @@ export default defineComponent({
           "そのタグが既に存在していたら成立扱いにしない[NOT OR条件]",
         tags_disable: "無効化させるタグ",
         special: "特殊",
+        tesuu_min: "最小手数制限",
         tesuu_max: "最大手数制限",
         hide: "非表示",
         noturn: "先手番/後手番のルール対生成をしない",
-      },
+      } as Record<string, string>,
     };
   },
   methods: {

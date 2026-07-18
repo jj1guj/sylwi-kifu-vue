@@ -1,6 +1,7 @@
+import { createInterface } from "node:readline";
+
 const lines: string[] = [];
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const reader = require("readline").createInterface({
+const reader = createInterface({
   input: process.stdin,
   output: process.stdout,
 });
@@ -8,12 +9,14 @@ const reader = require("readline").createInterface({
 reader.on("line", (line: string) => {
   lines.push(line);
 });
-reader.on("close", () => {
-  const data = JSON.parse(lines.join(""));
 
-  for (const value of Object.values<{
-    [key: string]: string | undefined;
-  }>(data)) {
+reader.on("close", () => {
+  const data = JSON.parse(lines.join("")) as Record<
+    string,
+    Record<string, string | undefined>
+  >;
+
+  for (const value of Object.values(data)) {
     value.path = undefined;
   }
 

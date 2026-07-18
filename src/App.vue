@@ -46,7 +46,7 @@ body {
     margin: 0;
     vertical-align: center;
     text-align: center;
-    font-size: unquote("min(2.5vh, 1em)");
+    font-size: min(2.5vh, 1em);
   }
   a {
     font-weight: bold;
@@ -55,6 +55,6 @@ body {
       color: #42b983;
     }
   }
-  height: unquote("min(3vh, 1.5em)");
+  height: min(3vh, 1.5em);
 }
 </style>

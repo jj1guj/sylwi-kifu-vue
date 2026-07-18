@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, VNode, reactive, h, watch, computed } from "vue";
 import { RouterLink } from "vue-router";
-import iconLinkRaw from "!!raw-loader!@tabler/icons/icons/link.svg";
+import iconLinkRaw from "@tabler/icons/icons/link.svg?raw";
 import { getKifuOrgUrl } from "@/modules/kifuurl";
 import { useStore } from "vuex";
 
