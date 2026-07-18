@@ -12,6 +12,7 @@ import { PieceTrans, PieceTransTactics } from "./piecetrans";
 import Ammo from "ammojs-typed";
 import { JKFPlayer } from "json-kifu-format";
 import { defineComponent, h, watch } from "vue";
+import cathedralHdrUrl from "@/assets/cube/small_cathedral_512.hdr";
 
 const scalarLerp = (
   start: number,
@@ -561,7 +562,7 @@ export class StageSet {
 
     // cubemap読み込み
     const cubemap = new BABYLON.HDRCubeTexture(
-      require("file-loader!@/assets/cube/small_cathedral_512.hdr"),
+      cathedralHdrUrl,
       scene,
       256,
       // reflection に roughness を適用するために mipmapはあった方が良い?

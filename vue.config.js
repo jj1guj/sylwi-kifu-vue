@@ -10,6 +10,21 @@ module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "./" : "./",
   // productionSourceMap: false,
   configureWebpack: (config) => {
+    config.resolve ??= {};
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+    };
+
+    config.module.rules.push({
+      test: /\.hdr$/i,
+      type: "asset/resource",
+      generator: {
+        filename: "img/[name].[contenthash:8][ext]",
+      },
+    });
+
     if (IS_PROD) {
       config.plugins = [
         ...config.plugins,

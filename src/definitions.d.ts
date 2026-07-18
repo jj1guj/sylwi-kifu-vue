@@ -28,6 +28,11 @@ declare module "*.otf" {
   export default value;
 }
 
+declare module "*.hdr" {
+  const value: string;
+  export default value;
+}
+
 interface ClipboardItem {
   readonly lastModified: number;
   readonly delayed: boolean;
