@@ -16,11 +16,9 @@
           title="棋譜URLをクリップボードにコピー"
           v-if="data.hasClipboard"
         />
-        <router-link
-          :to="{ path: `/${props.tournament}/${props.gameid}` }"
-          replace
-          >{{ props.gamename }}</router-link
-        >
+        <router-link :to="{ path: `/${props.tournament}/${props.gameid}` }">{{
+          props.gamename
+        }}</router-link>
       </div>
     </div>
     <div v-if="data.activated">

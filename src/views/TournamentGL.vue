@@ -88,7 +88,7 @@ export default defineComponent({
       linkKifuMultiAll: computed(() => `/${props.tournament}/multiall`),
     });
     const changeGame = (msg: { tournament: string; gameid: string }) => {
-      router.replace(`/${msg.tournament}/${msg.gameid}`);
+      router.replace(`/3d/${msg.tournament}/${msg.gameid}`);
     };
     return {
       props,
