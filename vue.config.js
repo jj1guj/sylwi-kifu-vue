@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const CompressionPlugin = require("compression-webpack-plugin");
 const { gzip } = require("@gfx/zopfli");
-const BrotliPlugin = require("brotli-webpack-plugin");
+const zlib = require("zlib");
 const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
 //const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const CopyPlugin = require("copy-webpack-plugin");
@@ -35,9 +35,17 @@ module.exports = {
           minRatio: 0.99,
           deleteOriginalAssets: false,
         }),
-        new BrotliPlugin({
+        new CompressionPlugin({
+          filename: "[path][base].br",
+          algorithm: "brotliCompress",
           test: /\.(css|html|js|json|map|svg)$/,
+          compressionOptions: {
+            params: {
+              [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+            },
+          },
           minRatio: 0.99,
+          deleteOriginalAssets: false,
         }),
         new CopyPlugin({
           patterns: [
