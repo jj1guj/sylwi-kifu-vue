@@ -2,14 +2,10 @@
   <div id="app">
     <div id="nav">
       <p>
-        <router-link to="/" replace>Home</router-link> |
-        <router-link to="/about" replace>About</router-link> |
-        <router-link to="/floodgate" replace>Floodgate</router-link> /
-        <router-link to="/3d/floodgate" replace>(3D)</router-link> |
-        <router-link to="/dr1_tsec_p1" replace>電竜戦TSEC予選</router-link> /
-        <router-link to="/3d/dr1_tsec_p1" replace>(3D)</router-link> |
-        <router-link to="/dr1_production" replace>電竜戦</router-link> /
-        <router-link to="/3d/dr1_production" replace>(3D)</router-link> |
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link> |
+        <router-link to="/castle">戦型・戦法・囲い等タグ</router-link> |
+        <router-link to="/floodgate">Floodgate</router-link>
       </p>
     </div>
     <router-view />
