@@ -75,9 +75,8 @@ export class PieceTrans implements IPieceTrans {
           (() => {
             const wMul = 1.05;
             const toR = false;
-            const handPosX = (sq === Shogi.Square.BLACK_HAND
-              ? stage.htableb
-              : stage.htablew
+            const handPosX = (
+              sq === Shogi.Square.BLACK_HAND ? stage.htableb : stage.htablew
             ).position.x;
             const handPN = sq === Shogi.Square.BLACK_HAND ? +1 : -1;
             const fv = pos.fv.map((tp: Shogi.Piece[]) =>
@@ -98,9 +97,8 @@ export class PieceTrans implements IPieceTrans {
                 hGroup1.push(tp.concat([]));
                 hWidth1Prev = hWidth1;
               } else {
-                hGroup1[hGroup1.length - 1] = hGroup1[
-                  hGroup1.length - 1
-                ].concat(tp);
+                hGroup1[hGroup1.length - 1] =
+                  hGroup1[hGroup1.length - 1].concat(tp);
                 hWidth1Prev += hWidth1;
               }
             });

@@ -33,13 +33,17 @@ export default createStore({
         getListJson: (state) => (tournament: string) => {
           return state.gameList[tournament]?.listjson;
         },
-        getListCheckTime: (state) => (tournament: string): number =>
-          state.listCheckTime[tournament] ?? 0,
+        getListCheckTime:
+          (state) =>
+          (tournament: string): number =>
+            state.listCheckTime[tournament] ?? 0,
         getRawBuoy: (state) => (tournament: string) => {
           return state.buoyTable[tournament]?.raw;
         },
-        getBuoyCheckTime: (state) => (tournament: string): number =>
-          state.buoyCheckTime[tournament] ?? 0,
+        getBuoyCheckTime:
+          (state) =>
+          (tournament: string): number =>
+            state.buoyCheckTime[tournament] ?? 0,
         getBuoy: (state) => (tournament: string, buoyid: string) => {
           const f: string[][] = state.buoyTable[tournament]?.table.filter(
             (line: string[]) => line[0] === buoyid
@@ -55,74 +59,76 @@ export default createStore({
             `{"header":{},"moves":[{}]}`
           );
         },
-        getBuoyTesuu: (state) => (
-          tournament: string,
-          gameId: string
-        ): boolean => {
-          return state.csa[`${tournament}/${gameId}`]?.buoyTesuu ?? 0;
-        },
-        getTesuuMax: (state) => (
-          tournament: string,
-          gameId: string
-        ): boolean => {
-          return state.csa[`${tournament}/${gameId}`]?.tesuuMax ?? 0;
-        },
-        getGameEnd: (state) => (
-          tournament: string,
-          gameId: string
-        ): boolean => {
-          return state.csa[`${tournament}/${gameId}`]?.gameEnd ?? false;
-        },
-        getPlayer1: (state) => (tournament: string, gameId: string): string => {
-          return state.csa[`${tournament}/${gameId}`]?.p1 ?? "";
-        },
-        getPlayer2: (state) => (tournament: string, gameId: string): string => {
-          return state.csa[`${tournament}/${gameId}`]?.p2 ?? "";
-        },
+        getBuoyTesuu:
+          (state) =>
+          (tournament: string, gameId: string): boolean => {
+            return state.csa[`${tournament}/${gameId}`]?.buoyTesuu ?? 0;
+          },
+        getTesuuMax:
+          (state) =>
+          (tournament: string, gameId: string): boolean => {
+            return state.csa[`${tournament}/${gameId}`]?.tesuuMax ?? 0;
+          },
+        getGameEnd:
+          (state) =>
+          (tournament: string, gameId: string): boolean => {
+            return state.csa[`${tournament}/${gameId}`]?.gameEnd ?? false;
+          },
+        getPlayer1:
+          (state) =>
+          (tournament: string, gameId: string): string => {
+            return state.csa[`${tournament}/${gameId}`]?.p1 ?? "";
+          },
+        getPlayer2:
+          (state) =>
+          (tournament: string, gameId: string): string => {
+            return state.csa[`${tournament}/${gameId}`]?.p2 ?? "";
+          },
       },
       mutations: {
         mutList(state, { tournament, rawlist }) {
-          const list = (tournament === "floodgate"
-            ? rawlist
-                .split("\n")
-                .map((s: string) =>
-                  s.match(
-                    /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d \[INFO\] game (?:started|finished) ((?:[\w.-]+\+){4}\d+)/
+          const list = (
+            tournament === "floodgate"
+              ? rawlist
+                  .split("\n")
+                  .map((s: string) =>
+                    s.match(
+                      /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d \[INFO\] game (?:started|finished) ((?:[\w.-]+\+){4}\d+)/
+                    )
                   )
-                )
-                .filter((s: RegExpMatchArray | null) => s)
-                .map((s: RegExpMatchArray) => ({
-                  gameId: s[1],
-                  gameName: `☗${s[1].split("+")[2]} ☖${
-                    s[1].split("+")[3]
-                  } (${s[1].split("+")[4].substring(0, 4)}-${s[1]
-                    .split("+")[4]
-                    .substring(4, 6)}-${s[1]
-                    .split("+")[4]
-                    .substring(6, 8)} ${s[1]
-                    .split("+")[4]
-                    .substring(8, 10)}:${s[1]
-                    .split("+")[4]
-                    .substring(10, 12)}:${s[1]
-                    .split("+")[4]
-                    .substring(12, 14)})`,
-                }))
-            : rawlist
-                .split("\n")
-                .map((s: string) =>
-                  s.match(
-                    /^<div><a href="\.\/kifujs\/((?:[\w.-]+\+){4}\d+)\.html"[^>]*>([^\n]+)<\/a>/
+                  .filter((s: RegExpMatchArray | null) => s)
+                  .map((s: RegExpMatchArray) => ({
+                    gameId: s[1],
+                    gameName: `☗${s[1].split("+")[2]} ☖${
+                      s[1].split("+")[3]
+                    } (${s[1].split("+")[4].substring(0, 4)}-${s[1]
+                      .split("+")[4]
+                      .substring(4, 6)}-${s[1]
+                      .split("+")[4]
+                      .substring(6, 8)} ${s[1]
+                      .split("+")[4]
+                      .substring(8, 10)}:${s[1]
+                      .split("+")[4]
+                      .substring(10, 12)}:${s[1]
+                      .split("+")[4]
+                      .substring(12, 14)})`,
+                  }))
+              : rawlist
+                  .split("\n")
+                  .map((s: string) =>
+                    s.match(
+                      /^<div><a href="\.\/kifujs\/((?:[\w.-]+\+){4}\d+)\.html"[^>]*>([^\n]+)<\/a>/
+                    )
                   )
-                )
-                .filter((s: RegExpMatchArray | null) => s)
-                .map((s: RegExpMatchArray) => ({
-                  gameId: (s as string[])[1],
-                  gameName: (s as string[])[2]
-                    .replace(/<[^>]+>/g, "")
-                    .replace(/[<>]/g, "")
-                    .replace(/▲/g, "☗")
-                    .replace(/△/g, "☖"),
-                }))
+                  .filter((s: RegExpMatchArray | null) => s)
+                  .map((s: RegExpMatchArray) => ({
+                    gameId: (s as string[])[1],
+                    gameName: (s as string[])[2]
+                      .replace(/<[^>]+>/g, "")
+                      .replace(/[<>]/g, "")
+                      .replace(/▲/g, "☗")
+                      .replace(/△/g, "☖"),
+                  }))
           )
             .filter(
               (

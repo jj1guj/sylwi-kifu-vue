@@ -171,11 +171,13 @@ export default defineComponent({
                   title: "棋譜のURLをクリップボードにコピー",
                   onClick: () => {
                     if (navigator?.clipboard) {
-                      (navigator?.clipboard as
-                        | undefined
-                        | {
-                            writeText(str: string): Promise<unknown>;
-                          })?.writeText(kifuOrgUrl);
+                      (
+                        navigator?.clipboard as
+                          | undefined
+                          | {
+                              writeText(str: string): Promise<unknown>;
+                            }
+                      )?.writeText(kifuOrgUrl);
                     }
                   },
                 }),

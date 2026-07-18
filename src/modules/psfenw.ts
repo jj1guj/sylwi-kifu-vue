@@ -587,9 +587,11 @@ export const toPackedSfenWeb = (
     h.add(
       move.from
         ? (move.from.x - 1) * 18 + (move.from.y - 1) * 2
-        : ({ OU: 0, FU: 2, KY: 4, KE: 6, GI: 8, KI: 10, KA: 12, HI: 14 } as {
-            [kind: string]: number;
-          })[Piece.unpromote(move.piece)] +
+        : (
+            { OU: 0, FU: 2, KY: 4, KE: 6, GI: 8, KI: 10, KA: 12, HI: 14 } as {
+              [kind: string]: number;
+            }
+          )[Piece.unpromote(move.piece)] +
             (move.color << 5) +
             192,
       7
@@ -597,9 +599,11 @@ export const toPackedSfenWeb = (
     h.add(
       move.to
         ? (move.to.x - 1) * 18 + (move.to.y - 1) * 2
-        : ({ OU: 0, FU: 2, KY: 4, KE: 6, GI: 8, KI: 10, KA: 12, HI: 14 } as {
-            [kind: string]: number;
-          })[Piece.unpromote(move.piece)] +
+        : (
+            { OU: 0, FU: 2, KY: 4, KE: 6, GI: 8, KI: 10, KA: 12, HI: 14 } as {
+              [kind: string]: number;
+            }
+          )[Piece.unpromote(move.piece)] +
             (move.color << 5) +
             192,
       7
@@ -609,44 +613,48 @@ export const toPackedSfenWeb = (
     h.add(0, 1);
     h.add(
       move.relative
-        ? ({
-            L: 16,
-            C: 32,
-            R: 48,
-            M: 64,
-            LM: 80,
-            H: 96,
-            RM: 112,
-            U: 128,
-            LU: 144,
-            CU: 160,
-            RU: 176,
-            D: 192,
-            LD: 208,
-            CD: 224,
-            RD: 240,
-          } as { [rel: string]: number })[move.relative]
+        ? (
+            {
+              L: 16,
+              C: 32,
+              R: 48,
+              M: 64,
+              LM: 80,
+              H: 96,
+              RM: 112,
+              U: 128,
+              LU: 144,
+              CU: 160,
+              RU: 176,
+              D: 192,
+              LD: 208,
+              CD: 224,
+              RD: 240,
+            } as { [rel: string]: number }
+          )[move.relative]
         : 0,
       4
     );
     h.add(
       move.capture
-        ? ({
-            FU: 16,
-            KY: 32,
-            KE: 48,
-            GI: 64,
-            KI: 80,
-            KA: 96,
-            HI: 112,
-            OU: 128,
-            TO: 144,
-            NY: 160,
-            NK: 176,
-            NG: 192,
-            UM: 224,
-            RY: 240,
-          } as { [kind: string]: number })[move.capture]
+        ? (
+            {
+              FU: 16,
+              KY: 32,
+              KE: 48,
+              GI: 64,
+              KI: 80,
+              KA: 96,
+              HI: 112,
+              OU: 128,
+              TO: 144,
+              NY: 160,
+              NK: 176,
+              NG: 192,
+              UM: 224,
+              RY: 240,
+            } as { [kind: string]: number }
+          )[move.capture]
         : 0,
       4
     );

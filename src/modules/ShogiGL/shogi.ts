@@ -1226,8 +1226,8 @@ export const moveDefPlainTable: ReadonlyArray<MoveDefPlain> = [
 /**
  * 駒移動定義表
  */
-export const moveDefTable: ReadonlyArray<MoveDefinition> = moveDefPlainTable.map(
-  (mDef, i, a) => {
+export const moveDefTable: ReadonlyArray<MoveDefinition> =
+  moveDefPlainTable.map((mDef, i, a) => {
     const fn = (
       v: MoveDefPlainEntry,
       i: number,
@@ -1254,8 +1254,7 @@ export const moveDefTable: ReadonlyArray<MoveDefinition> = moveDefPlainTable.map
       just: mDef.just ? mDef.just.map(fn) : undefined,
       fly: mDef.fly ? mDef.fly.map(fn) : undefined,
     };
-  }
-);
+  });
 
 /**
  * 筋bitboard
@@ -1434,19 +1433,17 @@ export interface Move {
  * 盤面ハッシュ0
  * boardPieceHash0[pt2][sq]
  */
-export const boardPieceHash0: ReadonlyArray<
-  ReadonlyArray<number>
-> = Array.from({ length: PieceType2.NB }, (v, pt2) =>
-  Array.from({ length: 81 }, (v, sq) => mtRand.next().value)
+export const boardPieceHash0: ReadonlyArray<ReadonlyArray<number>> = Array.from(
+  { length: PieceType2.NB },
+  (v, pt2) => Array.from({ length: 81 }, (v, sq) => mtRand.next().value)
 );
 /**
  * 盤面ハッシュ1
  * boardPieceHash0[pt2][sq]
  */
-export const boardPieceHash1: ReadonlyArray<
-  ReadonlyArray<number>
-> = Array.from({ length: PieceType2.NB }, (v, pt2) =>
-  Array.from({ length: 81 }, (v, sq) => mtRand.next().value)
+export const boardPieceHash1: ReadonlyArray<ReadonlyArray<number>> = Array.from(
+  { length: PieceType2.NB },
+  (v, pt2) => Array.from({ length: 81 }, (v, sq) => mtRand.next().value)
 );
 /**
  * 手駒ハッシュ0
@@ -2288,9 +2285,10 @@ export class Position {
                 ) {
                   `${parseErrorStr}: 持駒が存在しない`;
                 }
-                const fromPiece = this.hand[this.turn][
-                  convPt0Pt2(pt0h[frag[0]], false, this.turn)
-                ][0];
+                const fromPiece =
+                  this.hand[this.turn][
+                    convPt0Pt2(pt0h[frag[0]], false, this.turn)
+                  ][0];
                 const toPiece = fromPiece.genSquare(toSq);
                 this.doMove({ fromPiece, toPiece, turn: this.turn });
               } else {

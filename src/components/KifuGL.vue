@@ -576,21 +576,21 @@ export default defineComponent({
     // 棋譜コピーボタン
     const doCopy = () => {
       if (navigator?.clipboard) {
-        (navigator?.clipboard as
-          | undefined
-          | { writeText(str: string): Promise<unknown> })?.writeText(
-          data.kifustr
-        );
+        (
+          navigator?.clipboard as
+            | undefined
+            | { writeText(str: string): Promise<unknown> }
+        )?.writeText(data.kifustr);
       }
     };
     // 棋譜URLコピーボタン
     const doCopyURL = () => {
       if (navigator?.clipboard) {
-        (navigator?.clipboard as
-          | undefined
-          | { writeText(str: string): Promise<unknown> })?.writeText(
-          getKifuorgurl()
-        );
+        (
+          navigator?.clipboard as
+            | undefined
+            | { writeText(str: string): Promise<unknown> }
+        )?.writeText(getKifuorgurl());
       }
     };
     // 棋譜ダウンロードボタン

@@ -42,13 +42,11 @@ module.exports = {
         new CopyPlugin({
           patterns: [
             {
-              from:
-                "node_modules/noto-sans-cjk-jp/fonts/NotoSansCJKjp-Regular.woff",
+              from: "node_modules/noto-sans-cjk-jp/fonts/NotoSansCJKjp-Regular.woff",
               to: "font/[name].[ext]",
             },
             {
-              from:
-                "node_modules/noto-sans-cjk-jp/fonts/NotoSansCJKjp-Bold.woff",
+              from: "node_modules/noto-sans-cjk-jp/fonts/NotoSansCJKjp-Bold.woff",
               to: "font/[name].[ext]",
             },
             {

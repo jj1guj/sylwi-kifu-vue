@@ -717,15 +717,17 @@ export class StageSet {
               }${v.move.promote ? "+" : ""}`
             : v.move.to
             ? `${
-                ({
-                  FU: "P",
-                  KY: "L",
-                  KE: "N",
-                  GI: "S",
-                  KI: "G",
-                  KA: "B",
-                  HI: "R",
-                } as { [csapt: string]: string })[v.move.piece]
+                (
+                  {
+                    FU: "P",
+                    KY: "L",
+                    KE: "N",
+                    GI: "S",
+                    KI: "G",
+                    KA: "B",
+                    HI: "R",
+                  } as { [csapt: string]: string }
+                )[v.move.piece]
               }*${v.move.to.x}${"_abcdefghi"[v.move.to.y]}`
             : ""
         )

@@ -87,29 +87,33 @@ export const piece_readable = (p: string): string => {
 
 export const sq_readable = (sq: string): string =>
   `${
-    ({
-      "1": "１",
-      "2": "２",
-      "3": "３",
-      "4": "４",
-      "5": "５",
-      "6": "６",
-      "7": "７",
-      "8": "８",
-      "9": "９",
-    } as { [file: string]: string })[sq.substring(0, 1)]
+    (
+      {
+        "1": "１",
+        "2": "２",
+        "3": "３",
+        "4": "４",
+        "5": "５",
+        "6": "６",
+        "7": "７",
+        "8": "８",
+        "9": "９",
+      } as { [file: string]: string }
+    )[sq.substring(0, 1)]
   }${
-    ({
-      a: "一",
-      b: "二",
-      c: "三",
-      d: "四",
-      e: "五",
-      f: "六",
-      g: "七",
-      h: "八",
-      i: "九",
-    } as { [rank: string]: string })[sq.substring(1, 2)]
+    (
+      {
+        a: "一",
+        b: "二",
+        c: "三",
+        d: "四",
+        e: "五",
+        f: "六",
+        g: "七",
+        h: "八",
+        i: "九",
+      } as { [rank: string]: string }
+    )[sq.substring(1, 2)]
   }`;
 
 export type CastleOrgEntryType = {
@@ -132,8 +136,10 @@ export type CastleOrgEntryType = {
   hide?: boolean; // デフォルト非表示
   noturn?: boolean; // (先/後)手番拡張
 };
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-export const castleOrgData = require("@/assets/castle/castle.json") as CastleOrgEntryType[];
+
+export const castleOrgData =
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require("@/assets/castle/castle.json") as CastleOrgEntryType[];
 
 export type CastleEntryType = {
   id: string; // タグ管理名
