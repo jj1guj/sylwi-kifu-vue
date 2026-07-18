@@ -3,7 +3,7 @@ export const getKifuMirrorUrl = (
   gameid: string
 ): string => {
   return tournament === "floodgate"
-    ? `https://p.mzr.jp/wdoor-latest/${gameid.substring(
+    ? `https://wdoor.c.u-tokyo.ac.jp/shogi/x/${gameid.substring(
         gameid.length - 14,
         gameid.length - 10
       )}/${gameid.substring(
@@ -20,7 +20,7 @@ export const getKifuMirrorUrl = (
 
 export const getKifuOrgUrl = (tournament: string, gameid: string): string => {
   return tournament === "floodgate"
-    ? `http://wdoor.c.u-tokyo.ac.jp/shogi/LATEST/${gameid.substring(
+    ? `https://wdoor.c.u-tokyo.ac.jp/shogi/x/${gameid.substring(
         gameid.length - 14,
         gameid.length - 10
       )}/${gameid.substring(
@@ -35,7 +35,7 @@ export const getKifuOrgUrl = (tournament: string, gameid: string): string => {
 
 export const fetchGameListMirrorUrl = (tournament: string): string => {
   return tournament === "floodgate"
-    ? "https://p.mzr.jp/wdoor-latest/shogi-server.log"
+    ? "https://wdoor.c.u-tokyo.ac.jp/shogi/x/shogi-server.log"
     : window.location.host === "golan.sakura.ne.jp"
     ? `https://golan.sakura.ne.jp/denryusen/${tournament}/kifulist.txt`
     : `https://p.mzr.jp/denryusen/${tournament}/kifulist.txt`;
@@ -43,7 +43,7 @@ export const fetchGameListMirrorUrl = (tournament: string): string => {
 
 export const fetchGameListOrgUrl = (tournament: string): string => {
   return tournament === "floodgate"
-    ? "http://wdoor.c.u-tokyo.ac.jp/shogi/LATEST/shogi-server.log"
+    ? "https://wdoor.c.u-tokyo.ac.jp/shogi/x/shogi-server.log"
     : `https://golan.sakura.ne.jp/denryusen/${tournament}/kifulist.txt`;
 };
 
