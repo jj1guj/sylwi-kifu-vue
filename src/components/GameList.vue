@@ -46,11 +46,6 @@ export default defineComponent({
       required: false,
       default: () => false,
     },
-    gl: {
-      type: Boolean,
-      required: false,
-      default: () => false,
-    },
     gameNameInclude: {
       type: String,
       required: false,
@@ -184,9 +179,7 @@ export default defineComponent({
                 h(
                   RouterLink,
                   {
-                    to: `${this.props.gl ? `/3d` : ``}/${tournament}/${
-                      gameObj.gameId
-                    }`,
+                    to: `/${tournament}/${gameObj.gameId}`,
                   },
                   { default: () => gameObj.gameName }
                 ),

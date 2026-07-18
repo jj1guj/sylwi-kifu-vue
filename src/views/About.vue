@@ -5,30 +5,12 @@
       <h3>Computer Shogi</h3>
       <ul>
         <li>
-          <a href="https://www.denryu-sen.jp/" target="_blank" rel="noopener"
-            >世界将棋AI 電竜戦</a
-          >
-        </li>
-        <li>
           <a
-            href="http://wdoor.c.u-tokyo.ac.jp/shogi/floodgate.html"
+            href="https://wdoor.c.u-tokyo.ac.jp/shogi/floodgate.html"
             target="_blank"
             rel="noopener"
             >コンピュータ将棋連続対局場所 (floodgate)</a
           >
-        </li>
-      </ul>
-      <h3>Resources</h3>
-      <ul>
-        <li>
-          <p>
-            <a href="https://hdrihaven.com/" target="_blank" rel="noopener"
-              >HDRI Haven</a
-            >
-          </p>
-          <ul>
-            <li>HDRI environment map texture</li>
-          </ul>
         </li>
       </ul>
       <h3>Licenses</h3>

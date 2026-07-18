@@ -1,149 +1,142 @@
 {
-  "@babel/helper-validator-identifier@7.10.4": {
+  "@babel/helper-string-parser@7.29.7": {
     "licenses": "MIT",
     "repository": "https://github.com/babel/babel",
-    "licenseFile": "node_modules\\@babel\\helper-validator-identifier\\LICENSE"
+    "publisher": "The Babel Team",
+    "url": "https://babel.dev/team",
+    "licenseFile": "node_modules/@babel/helper-string-parser/LICENSE"
   },
-  "@babel/parser@7.12.7": {
+  "@babel/helper-validator-identifier@7.29.7": {
     "licenses": "MIT",
     "repository": "https://github.com/babel/babel",
-    "publisher": "Sebastian McKenzie",
-    "email": "sebmck@gmail.com",
-    "licenseFile": "node_modules\\@babel\\parser\\LICENSE"
+    "publisher": "The Babel Team",
+    "url": "https://babel.dev/team",
+    "licenseFile": "node_modules/@babel/helper-validator-identifier/LICENSE"
   },
-  "@babel/types@7.12.7": {
+  "@babel/parser@7.29.7": {
     "licenses": "MIT",
     "repository": "https://github.com/babel/babel",
-    "publisher": "Sebastian McKenzie",
-    "email": "sebmck@gmail.com",
-    "licenseFile": "node_modules\\@babel\\types\\LICENSE"
+    "publisher": "The Babel Team",
+    "url": "https://babel.dev/team",
+    "licenseFile": "node_modules/@babel/parser/LICENSE"
   },
-  "@babylonjs/core@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js",
-    "publisher": "David CATUHE",
-    "licenseFile": "node_modules\\@babylonjs\\core\\license.md"
+  "@babel/types@7.29.7": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "publisher": "The Babel Team",
+    "url": "https://babel.dev/team",
+    "licenseFile": "node_modules/@babel/types/LICENSE"
   },
-  "@babylonjs/gui@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js",
-    "publisher": "David CATUHE",
-    "licenseFile": "node_modules\\@babylonjs\\gui\\readme.md"
-  },
-  "@babylonjs/materials@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js",
-    "publisher": "David CATUHE",
-    "licenseFile": "node_modules\\@babylonjs\\materials\\readme.md"
-  },
-  "@babylonjs/post-processes@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js",
-    "publisher": "David CATUHE",
-    "licenseFile": "node_modules\\@babylonjs\\post-processes\\readme.md"
-  },
-  "@babylonjs/procedural-textures@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js",
-    "publisher": "David CATUHE",
-    "licenseFile": "node_modules\\@babylonjs\\procedural-textures\\readme.md"
-  },
-  "@babylonjs/serializers@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js",
-    "publisher": "David CATUHE",
-    "licenseFile": "node_modules\\@babylonjs\\serializers\\readme.md"
+  "@jridgewell/sourcemap-codec@1.5.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jridgewell/sourcemaps",
+    "publisher": "Justin Ridgewell",
+    "email": "justin@ridgewell.name",
+    "licenseFile": "node_modules/@jridgewell/sourcemap-codec/LICENSE"
   },
   "@tabler/icons@1.38.1": {
     "licenses": "MIT",
     "repository": "https://github.com/tabler/tabler-icons",
     "publisher": "codecalm",
-    "licenseFile": "node_modules\\@tabler\\icons\\LICENSE"
+    "licenseFile": "node_modules/@tabler/icons/LICENSE"
   },
   "@types/hoist-non-react-statics@3.3.1": {
     "licenses": "MIT",
     "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
-    "licenseFile": "node_modules\\@types\\hoist-non-react-statics\\LICENSE"
+    "licenseFile": "node_modules/@types/hoist-non-react-statics/LICENSE"
   },
   "@types/prop-types@15.7.3": {
     "licenses": "MIT",
     "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
-    "licenseFile": "node_modules\\@types\\prop-types\\LICENSE"
+    "licenseFile": "node_modules/@types/prop-types/LICENSE"
   },
   "@types/react@17.0.0": {
     "licenses": "MIT",
     "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
-    "licenseFile": "node_modules\\@types\\react\\LICENSE"
+    "licenseFile": "node_modules/@types/react/LICENSE"
   },
-  "@vue/compiler-core@3.0.4": {
+  "@vue/compiler-core@3.5.40": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\@vue\\compiler-core\\LICENSE"
+    "licenseFile": "node_modules/@vue/compiler-core/LICENSE"
   },
-  "@vue/compiler-dom@3.0.4": {
+  "@vue/compiler-dom@3.5.40": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\@vue\\compiler-dom\\LICENSE"
+    "licenseFile": "node_modules/@vue/compiler-dom/LICENSE"
   },
-  "@vue/reactivity@3.0.4": {
+  "@vue/compiler-sfc@3.5.40": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\@vue\\reactivity\\LICENSE"
+    "licenseFile": "node_modules/@vue/compiler-sfc/LICENSE"
   },
-  "@vue/runtime-core@3.0.4": {
+  "@vue/compiler-ssr@3.5.40": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\@vue\\runtime-core\\LICENSE"
+    "licenseFile": "node_modules/@vue/compiler-ssr/LICENSE"
   },
-  "@vue/runtime-dom@3.0.4": {
+  "@vue/devtools-api@6.6.4": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/vue-devtools",
+    "publisher": "Guillaume Chau"
+  },
+  "@vue/reactivity@3.5.40": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\@vue\\runtime-dom\\LICENSE"
+    "licenseFile": "node_modules/@vue/reactivity/LICENSE"
   },
-  "@vue/shared@3.0.4": {
+  "@vue/runtime-core@3.5.40": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\@vue\\shared\\README.md"
+    "licenseFile": "node_modules/@vue/runtime-core/LICENSE"
   },
-  "ammojs-typed@1.0.6": {
+  "@vue/runtime-dom@3.5.40": {
     "licenses": "MIT",
-    "repository": "https://github.com/giniedp/ammojs-typed",
-    "publisher": "Alexander Gräfenstein",
-    "licenseFile": "node_modules\\ammojs-typed\\Readme.md"
+    "repository": "https://github.com/vuejs/core",
+    "publisher": "Evan You",
+    "licenseFile": "node_modules/@vue/runtime-dom/LICENSE"
+  },
+  "@vue/server-renderer@3.5.40": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vuejs/core",
+    "publisher": "Evan You",
+    "licenseFile": "node_modules/@vue/server-renderer/LICENSE"
+  },
+  "@vue/shared@3.5.40": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vuejs/core",
+    "publisher": "Evan You",
+    "licenseFile": "node_modules/@vue/shared/LICENSE"
   },
   "asap@2.0.6": {
     "licenses": "MIT",
     "repository": "https://github.com/kriskowal/asap",
-    "licenseFile": "node_modules\\asap\\LICENSE.md"
-  },
-  "babylonjs-gltf2interface@4.2.0": {
-    "licenses": "Apache-2.0",
-    "repository": "https://github.com/BabylonJS/Babylon.js"
-  },
-  "csstype@2.6.14": {
-    "licenses": "MIT",
-    "repository": "https://github.com/frenic/csstype",
-    "publisher": "Fredrik Nicol",
-    "email": "fredrik.nicol@gmail.com",
-    "licenseFile": "node_modules\\csstype\\LICENSE"
+    "licenseFile": "node_modules/asap/LICENSE.md"
   },
   "csstype@3.0.5": {
     "licenses": "MIT",
     "repository": "https://github.com/frenic/csstype",
     "publisher": "Fredrik Nicol",
     "email": "fredrik.nicol@gmail.com",
-    "licenseFile": "node_modules\\@types\\react\\node_modules\\csstype\\LICENSE"
+    "licenseFile": "node_modules/@types/react/node_modules/csstype/LICENSE"
+  },
+  "csstype@3.2.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/frenic/csstype",
+    "publisher": "Fredrik Nicol",
+    "email": "fredrik.nicol@gmail.com",
+    "licenseFile": "node_modules/csstype/LICENSE"
   },
   "dnd-core@7.7.0": {
     "licenses": "MIT",
     "repository": "https://github.com/react-dnd/react-dnd",
-    "licenseFile": "node_modules\\dnd-core\\LICENSE"
+    "licenseFile": "node_modules/dnd-core/LICENSE"
   },
   "dnd-multi-backend@3.2.1": {
     "licenses": "MIT",
@@ -151,78 +144,91 @@
     "publisher": "Louis Brunner",
     "email": "louis.brunner.fr@gmail.com",
     "url": "https://github.com/LouisBrunner",
-    "licenseFile": "node_modules\\dnd-multi-backend\\README.md"
+    "licenseFile": "node_modules/dnd-multi-backend/README.md"
   },
-  "estree-walker@2.0.1": {
+  "entities@7.0.1": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/fb55/entities",
+    "publisher": "Felix Boehm",
+    "email": "me@feedic.com",
+    "licenseFile": "node_modules/@vue/compiler-core/node_modules/entities/LICENSE"
+  },
+  "estree-walker@2.0.2": {
     "licenses": "MIT",
     "repository": "https://github.com/Rich-Harris/estree-walker",
     "publisher": "Rich Harris",
-    "licenseFile": "node_modules\\estree-walker\\README.md"
+    "licenseFile": "node_modules/estree-walker/LICENSE"
   },
   "hoist-non-react-statics@3.3.2": {
     "licenses": "BSD-3-Clause",
     "repository": "https://github.com/mridgway/hoist-non-react-statics",
     "publisher": "Michael Ridgway",
     "email": "mcridgway@gmail.com",
-    "licenseFile": "node_modules\\hoist-non-react-statics\\LICENSE.md"
+    "licenseFile": "node_modules/hoist-non-react-statics/LICENSE.md"
   },
   "invariant@2.2.4": {
     "licenses": "MIT",
     "repository": "https://github.com/zertosh/invariant",
     "publisher": "Andres Suarez",
     "email": "zertosh@gmail.com",
-    "licenseFile": "node_modules\\invariant\\LICENSE"
+    "licenseFile": "node_modules/invariant/LICENSE"
   },
   "js-tokens@4.0.0": {
     "licenses": "MIT",
     "repository": "https://github.com/lydell/js-tokens",
     "publisher": "Simon Lydell",
-    "licenseFile": "node_modules\\js-tokens\\LICENSE"
+    "licenseFile": "node_modules/js-tokens/LICENSE"
   },
   "json-kifu-format@1.2.7": {
     "licenses": "MIT",
     "repository": "https://github.com/na2hiro/json-kifu-format",
     "publisher": "na2hiro",
-    "licenseFile": "node_modules\\json-kifu-format\\LICENSE.txt"
+    "licenseFile": "node_modules/json-kifu-format/LICENSE.txt"
   },
   "kifu-for-js@2.2.2": {
     "licenses": "MIT",
     "repository": "https://github.com/na2hiro/Kifu-for-JS",
     "publisher": "na2hiro",
-    "licenseFile": "node_modules\\kifu-for-js\\LICENSE.txt"
+    "licenseFile": "node_modules/kifu-for-js/LICENSE.txt"
   },
   "lodash@4.17.20": {
     "licenses": "MIT",
     "repository": "https://github.com/lodash/lodash",
     "publisher": "John-David Dalton",
     "email": "john.david.dalton@gmail.com",
-    "licenseFile": "node_modules\\lodash\\LICENSE"
+    "licenseFile": "node_modules/lodash/LICENSE"
   },
   "loose-envify@1.4.0": {
     "licenses": "MIT",
     "repository": "https://github.com/zertosh/loose-envify",
     "publisher": "Andres Suarez",
     "email": "zertosh@gmail.com",
-    "licenseFile": "node_modules\\loose-envify\\LICENSE"
+    "licenseFile": "node_modules/loose-envify/LICENSE"
+  },
+  "magic-string@0.30.21": {
+    "licenses": "MIT",
+    "repository": "https://github.com/Rich-Harris/magic-string",
+    "publisher": "Rich Harris",
+    "licenseFile": "node_modules/magic-string/LICENSE"
   },
   "mobx-react@5.4.4": {
     "licenses": "MIT",
     "repository": "https://github.com/mobxjs/mobx-react",
     "publisher": "Michel Weststrate",
-    "licenseFile": "node_modules\\mobx-react\\LICENSE"
+    "licenseFile": "node_modules/mobx-react/LICENSE"
   },
   "mobx@4.15.7": {
     "licenses": "MIT",
     "repository": "https://github.com/mobxjs/mobx",
     "publisher": "Michel Weststrate",
-    "licenseFile": "node_modules\\mobx\\LICENSE"
+    "licenseFile": "node_modules/mobx/LICENSE"
   },
-  "mtrand@1.1.0": {
+  "nanoid@3.3.16": {
     "licenses": "MIT",
-    "repository": "https://github.com/tcort/mtrand",
-    "publisher": "Thomas Cort",
-    "email": "linuxgeek@gmail.com",
-    "licenseFile": "node_modules\\mtrand\\LICENSE.md"
+    "repository": "https://github.com/ai/nanoid",
+    "publisher": "Andrey Sitnik",
+    "email": "andrey@sitnik.ru",
+    "licenseFile": "node_modules/nanoid/LICENSE"
   },
   "noto-sans-cjk-jp@1.0.1": {
     "licenses": "MIT",
@@ -234,17 +240,30 @@
     "publisher": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
     "url": "sindresorhus.com",
-    "licenseFile": "node_modules\\object-assign\\license"
+    "licenseFile": "node_modules/object-assign/license"
+  },
+  "picocolors@1.1.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/alexeyraspopov/picocolors",
+    "publisher": "Alexey Raspopov",
+    "licenseFile": "node_modules/picocolors/LICENSE"
+  },
+  "postcss@8.5.19": {
+    "licenses": "MIT",
+    "repository": "https://github.com/postcss/postcss",
+    "publisher": "Andrey Sitnik",
+    "email": "andrey@sitnik.es",
+    "licenseFile": "node_modules/postcss/LICENSE"
   },
   "prop-types@15.7.2": {
     "licenses": "MIT",
     "repository": "https://github.com/facebook/prop-types",
-    "licenseFile": "node_modules\\prop-types\\LICENSE"
+    "licenseFile": "node_modules/prop-types/LICENSE"
   },
   "react-dnd-html5-backend@2.6.0": {
     "licenses": "BSD-3-Clause",
     "repository": "https://github.com/react-dnd/react-dnd",
-    "licenseFile": "node_modules\\react-dnd-html5-backend\\LICENSE"
+    "licenseFile": "node_modules/react-dnd-html5-backend/LICENSE"
   },
   "react-dnd-multi-backend@3.2.2": {
     "licenses": "MIT",
@@ -252,7 +271,7 @@
     "publisher": "Louis Brunner",
     "email": "louis.brunner.fr@gmail.com",
     "url": "https://github.com/LouisBrunner",
-    "licenseFile": "node_modules\\react-dnd-multi-backend\\README.md"
+    "licenseFile": "node_modules/react-dnd-multi-backend/README.md"
   },
   "react-dnd-preview@3.2.2": {
     "licenses": "MIT",
@@ -260,49 +279,49 @@
     "publisher": "Louis Brunner",
     "email": "louis.brunner.fr@gmail.com",
     "url": "https://github.com/LouisBrunner",
-    "licenseFile": "node_modules\\react-dnd-preview\\README.md"
+    "licenseFile": "node_modules/react-dnd-preview/README.md"
   },
   "react-dnd-touch-backend@0.8.3": {
     "licenses": "MIT",
     "repository": "https://github.com/yahoo/react-dnd-touch-backend",
     "publisher": "Long Ho",
     "email": "holevietlong@gmail.com",
-    "licenseFile": "node_modules\\react-dnd-touch-backend\\LICENSE"
+    "licenseFile": "node_modules/react-dnd-touch-backend/LICENSE"
   },
   "react-dnd@7.7.0": {
     "licenses": "MIT",
     "repository": "https://github.com/react-dnd/react-dnd",
-    "licenseFile": "node_modules\\react-dnd\\LICENSE"
+    "licenseFile": "node_modules/react-dnd/LICENSE"
   },
   "react-dom@16.14.0": {
     "licenses": "MIT",
     "repository": "https://github.com/facebook/react",
-    "licenseFile": "node_modules\\react-dom\\LICENSE"
+    "licenseFile": "node_modules/react-dom/LICENSE"
   },
   "react-is@16.13.1": {
     "licenses": "MIT",
     "repository": "https://github.com/facebook/react",
-    "licenseFile": "node_modules\\react-is\\LICENSE"
+    "licenseFile": "node_modules/react-is/LICENSE"
   },
   "react-lifecycles-compat@3.0.4": {
     "licenses": "MIT",
     "repository": "https://github.com/reactjs/react-lifecycles-compat",
-    "licenseFile": "node_modules\\react-lifecycles-compat\\LICENSE.md"
+    "licenseFile": "node_modules/react-lifecycles-compat/LICENSE.md"
   },
   "react@16.14.0": {
     "licenses": "MIT",
     "repository": "https://github.com/facebook/react",
-    "licenseFile": "node_modules\\react\\LICENSE"
+    "licenseFile": "node_modules/react/LICENSE"
   },
   "redux@4.0.5": {
     "licenses": "MIT",
     "repository": "https://github.com/reduxjs/redux",
-    "licenseFile": "node_modules\\redux\\LICENSE.md"
+    "licenseFile": "node_modules/redux/LICENSE.md"
   },
   "scheduler@0.19.1": {
     "licenses": "MIT",
     "repository": "https://github.com/facebook/react",
-    "licenseFile": "node_modules\\scheduler\\LICENSE"
+    "licenseFile": "node_modules/scheduler/LICENSE"
   },
   "shallowequal@1.1.0": {
     "licenses": "MIT",
@@ -310,56 +329,57 @@
     "publisher": "Alberto Leal",
     "email": "mailforalberto@gmail.com",
     "url": "github.com/dashed",
-    "licenseFile": "node_modules\\shallowequal\\LICENSE"
+    "licenseFile": "node_modules/shallowequal/LICENSE"
   },
   "shogi.js@2.0.3": {
     "licenses": "MIT",
     "repository": "https://github.com/na2hiro/Shogi.js",
     "publisher": "na2hiro",
-    "licenseFile": "node_modules\\shogi.js\\README.md"
+    "licenseFile": "node_modules/shogi.js/README.md"
   },
-  "source-map@0.6.1": {
+  "source-map-js@1.2.1": {
     "licenses": "BSD-3-Clause",
-    "repository": "https://github.com/mozilla/source-map",
-    "publisher": "Nick Fitzgerald",
-    "email": "nfitzgerald@mozilla.com",
-    "licenseFile": "node_modules\\source-map\\LICENSE"
+    "repository": "https://github.com/7rulnik/source-map-js",
+    "publisher": "Valentin 7rulnik Semirulnik",
+    "email": "v7rulnik@gmail.com",
+    "licenseFile": "node_modules/source-map-js/LICENSE"
   },
   "symbol-observable@1.2.0": {
     "licenses": "MIT",
     "repository": "https://github.com/blesh/symbol-observable",
     "publisher": "Ben Lesh",
     "email": "ben@benlesh.com",
-    "licenseFile": "node_modules\\symbol-observable\\license"
+    "licenseFile": "node_modules/symbol-observable/license"
   },
-  "to-fast-properties@2.0.0": {
-    "licenses": "MIT",
-    "repository": "https://github.com/sindresorhus/to-fast-properties",
-    "publisher": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com",
-    "licenseFile": "node_modules\\to-fast-properties\\license"
-  },
-  "tslib@2.0.3": {
+  "tslib@2.8.1": {
     "licenses": "0BSD",
     "repository": "https://github.com/Microsoft/tslib",
     "publisher": "Microsoft Corp.",
-    "licenseFile": "node_modules\\tslib\\LICENSE.txt"
+    "licenseFile": "node_modules/tslib/LICENSE.txt"
   },
-  "vue-router@4.0.1": {
-    "licenses": "MIT",
-    "licenseFile": "node_modules\\vue-router\\LICENSE"
+  "typescript@4.9.5": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/Microsoft/TypeScript",
+    "publisher": "Microsoft Corp.",
+    "licenseFile": "node_modules/typescript/LICENSE.txt"
   },
-  "vue@3.0.4": {
+  "vue-router@4.6.4": {
     "licenses": "MIT",
-    "repository": "https://github.com/vuejs/vue-next",
+    "repository": "https://github.com/vuejs/router",
+    "publisher": "Eduardo San Martin Morote",
+    "email": "posva13@gmail.com",
+    "licenseFile": "node_modules/vue-router/LICENSE"
+  },
+  "vue@3.5.40": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vuejs/core",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\vue\\README.md"
+    "licenseFile": "node_modules/vue/LICENSE"
   },
-  "vuex@4.0.0-rc.2": {
+  "vuex@4.1.0": {
     "licenses": "MIT",
     "repository": "https://github.com/vuejs/vuex",
     "publisher": "Evan You",
-    "licenseFile": "node_modules\\vuex\\LICENSE"
+    "licenseFile": "node_modules/vuex/LICENSE"
   }
 }

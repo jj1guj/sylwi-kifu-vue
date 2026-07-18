@@ -71,22 +71,6 @@
         <button @click="changeQuery({ hideEnd: true })">hide</button>
         <button @click="changeQuery({ hideEnd: false })">show</button>
       </li>
-      <li v-if="props.tournament !== 'floodgate'">
-        名前条件:
-        <button @click="changeQuery({ gameNameInclude: '' })">none</button>
-        <button @click="changeQuery({ gameNameInclude: 'ファイナル' })">
-          ファイナル
-        </button>
-        <button @click="changeQuery({ gameNameInclude: 'A級' })">A級</button>
-        <button @click="changeQuery({ gameNameInclude: 'B級' })">B級</button>
-        <button @click="changeQuery({ gameNameInclude: '初日' })">初日</button>
-        <button @click="changeQuery({ gameNameInclude: '最終日' })">
-          最終日
-        </button>
-        <button @click="changeQuery({ gameNameInclude: 'テスト' })">
-          テスト
-        </button>
-      </li>
       <li>
         <label><input type="checkbox" v-model="data.show" />(debug)kifu</label>
       </li>

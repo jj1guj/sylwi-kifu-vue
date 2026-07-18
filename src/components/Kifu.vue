@@ -2,7 +2,7 @@
   <div
     class="kifu"
     v-if="
-      (!props.disableNonGame || data.tesuuMax > data.buoyTesuu) &&
+      (!props.disableNonGame || data.tesuuMax > 0) &&
       (!props.hideEnd ||
         data.inGame ||
         new Date().valueOf() < data.lastInGame + 60000)
@@ -44,11 +44,8 @@
         <div
           :class="
             props.lightEnd ||
-            (data.tesuuMax > data.buoyTesuu &&
-              data.tesuu >= Math.max(data.buoyTesuu, 1) &&
-              data.inGame) ||
-            (data.tesuu < data.tesuuMax &&
-              data.tesuu >= Math.max(data.buoyTesuu, 1))
+            (data.tesuuMax > 0 && data.tesuu >= 1 && data.inGame) ||
+            (data.tesuu < data.tesuuMax && data.tesuu >= 1)
               ? `banset`
               : `banset end`
           "
@@ -81,16 +78,7 @@
           <div>
             <div class="inlineblock players">
               <div class="mochi info">
-                <Info
-                  :jkf="data.jkfstr"
-                  :head="
-                    JSON.stringify(
-                      data.buoyName
-                        ? { 指定局面: `[${data.buoyName}] ${data.buoyComment}` }
-                        : {}
-                    )
-                  "
-                />
+                <Info :jkf="data.jkfstr" head="{}" />
               </div>
               <Mochi
                 :jkf="data.jkfstr"
@@ -156,15 +144,7 @@
           <button @click="doTweet" v-html="iconTwitterRaw" title="ツイート" />
           <button @click="doDiag" v-html="iconBrushRaw" title="局面図" />
         </div>
-        <div v-if="data.showDiag && props.tournament !== 'floodgate'">
-          <img
-            class="diag"
-            :src="`https://sylwi.mzr.jp/cimg_denryu.php?p=${getPSfenWB64()}&p1=${encodeURIComponent(
-              data.p1
-            )}&p2=${encodeURIComponent(data.p2)}`"
-          />
-        </div>
-        <div v-if="data.showDiag && props.tournament === 'floodgate'">
+        <div v-if="data.showDiag">
           <img
             class="diag"
             :src="`https://sylwi.mzr.jp/cimg_floodgate.php?p=${getPSfenWB64()}&p1=${encodeURIComponent(
@@ -531,9 +511,6 @@ export default defineComponent({
       jkfstr: `{"header":{},"moves":[{}]}`,
       tesuu: 0,
       tesuuMax: 0,
-      buoyName: "",
-      buoyComment: "",
-      buoyTesuu: 0,
       kifustr: "",
       ply: props.ply,
       error: "",
@@ -628,10 +605,6 @@ export default defineComponent({
     const updateData = () => {
       const tournament = props.tournament;
       const gameId = props.gameid;
-      const buoyEntry = store.getters["shogiServer/getBuoy"](
-        tournament,
-        gameId.match(/^[A-Za-z0-9_-]+\+buoy_([A-Za-z0-9.-]+)/)?.[1] ?? ""
-      );
       const tesuuMax = store.getters["shogiServer/getTesuuMax"](
         tournament,
         gameId
@@ -646,9 +619,6 @@ export default defineComponent({
         data.inGame,
         data.lastInGame,
         data.tesuuMax,
-        data.buoyName,
-        data.buoyComment,
-        data.buoyTesuu,
         data.jkfstr,
         data.tesuu,
         data.activated,
@@ -660,9 +630,6 @@ export default defineComponent({
         !gameEnd,
         gameEnd || tesuuMax === 0 ? data.lastInGame : new Date().valueOf(),
         tesuuMax,
-        buoyEntry[1] ?? "",
-        buoyEntry[2] ?? "",
-        store.getters["shogiServer/getBuoyTesuu"](tournament, gameId),
         store.getters["shogiServer/getJkf"](tournament, gameId),
         Math.max(
           Math.min(Number.isNaN(data.ply) ? Infinity : data.ply, tesuuMax),
@@ -691,10 +658,7 @@ export default defineComponent({
         callback: updateData,
       });
     };
-    data.intervalId = window.setInterval(
-      loadKifu,
-      props.tournament === "floodgate" ? 5000 : 2000
-    );
+    data.intervalId = window.setInterval(loadKifu, 5000);
     const moveToReadableKifu = (mv: IMoveFormat): string => {
       return JKFPlayer.moveToReadableKifu(mv);
     };
@@ -739,42 +703,21 @@ export default defineComponent({
     const doTweet = () => {
       const player = JKFPlayer.parseJKF(data.jkfstr);
       const readableKifu = player.getReadableKifu(data.tesuu);
-      const tweetProp =
-        props.tournament === "floodgate"
-          ? {
-              text: `${data.buoyName ? `[${data.buoyName}] ` : ""}${
-                props.gamename
-              } ${data.tesuu}手目 ${readableKifu}\n\n\n`,
-              url: new URL(
-                `./floodgate.php?tn=${props.tournament}&gi=${
-                  props.gameid
-                }&p=${getPSfenWB64()}&gn=${encodeURIComponent(
-                  props.gamename || ""
-                )}&p1=${encodeURIComponent(data.p1)}&p2=${encodeURIComponent(
-                  data.p2
-                )}`,
-                window.location.href
-              ).href,
-              hashtags: "将棋,floodgate",
-              via: "",
-            }
-          : {
-              text: `${data.buoyName ? `[${data.buoyName}] ` : ""}${
-                props.gamename
-              } ${data.tesuu}手目 ${readableKifu}\n\n\n`,
-              url: new URL(
-                `./denryu.php?tn=${props.tournament}&gi=${
-                  props.gameid
-                }&p=${getPSfenWB64()}&gn=${encodeURIComponent(
-                  props.gamename || ""
-                )}&p1=${encodeURIComponent(data.p1)}&p2=${encodeURIComponent(
-                  data.p2
-                )}`,
-                window.location.href
-              ).href,
-              hashtags: "将棋,電竜戦",
-              via: "DenryuSen",
-            };
+      const tweetProp = {
+        text: `${props.gamename} ${data.tesuu}手目 ${readableKifu}\n\n\n`,
+        url: new URL(
+          `./floodgate.php?tn=${props.tournament}&gi=${
+            props.gameid
+          }&p=${getPSfenWB64()}&gn=${encodeURIComponent(
+            props.gamename || ""
+          )}&p1=${encodeURIComponent(data.p1)}&p2=${encodeURIComponent(
+            data.p2
+          )}`,
+          window.location.href
+        ).href,
+        hashtags: "将棋,floodgate",
+        via: "",
+      };
       window.open(
         `https://twitter.com/intent/tweet?text=${encodeURIComponent(
           tweetProp.text

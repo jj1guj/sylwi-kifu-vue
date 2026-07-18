@@ -1,8 +1,4 @@
-import {
-  fetchGameBuoyTableUrl,
-  fetchGameListMirrorUrl,
-  getKifuMirrorUrl,
-} from "@/modules/kifuurl";
+import { fetchGameListMirrorUrl, getKifuMirrorUrl } from "@/modules/kifuurl";
 import { JKFPlayer } from "json-kifu-format";
 import { createStore } from "vuex";
 
@@ -13,8 +9,6 @@ export default createStore({
       state: () => ({
         gameList: {},
         listCheckTime: {},
-        buoyTable: {},
-        buoyCheckTime: {},
         csa: {},
       }),
       getters: {
@@ -37,19 +31,6 @@ export default createStore({
           (state) =>
           (tournament: string): number =>
             state.listCheckTime[tournament] ?? 0,
-        getRawBuoy: (state) => (tournament: string) => {
-          return state.buoyTable[tournament]?.raw;
-        },
-        getBuoyCheckTime:
-          (state) =>
-          (tournament: string): number =>
-            state.buoyCheckTime[tournament] ?? 0,
-        getBuoy: (state) => (tournament: string, buoyid: string) => {
-          const f: string[][] = state.buoyTable[tournament]?.table.filter(
-            (line: string[]) => line[0] === buoyid
-          );
-          return f && f.length > 0 ? [...f[0]] : [];
-        },
         getRawCsa: (state) => (tournament: string, gameId: string) => {
           return state.csa[`${tournament}/${gameId}`]?.csa;
         },
@@ -59,11 +40,6 @@ export default createStore({
             `{"header":{},"moves":[{}]}`
           );
         },
-        getBuoyTesuu:
-          (state) =>
-          (tournament: string, gameId: string): boolean => {
-            return state.csa[`${tournament}/${gameId}`]?.buoyTesuu ?? 0;
-          },
         getTesuuMax:
           (state) =>
           (tournament: string, gameId: string): boolean => {
@@ -155,29 +131,11 @@ export default createStore({
         mutListCheckTime(state, { tournament, time }) {
           state.listCheckTime[tournament] = time;
         },
-        mutBuoyCheckTime(state, { tournament, time }) {
-          state.buoyCheckTime[tournament] = time;
-        },
-        mutBuoy(state, { tournament, rawbuoy }) {
-          state.buoyTable[tournament] = {
-            raw: rawbuoy,
-            table: rawbuoy.split("\n").map((s: string) => s.split("|")),
-            updated: new Date().valueOf(),
-          };
-        },
         mutCsa(state, { tournament, gameId, csa }) {
           const player = JKFPlayer.parseCSA(csa);
           state.csa[`${tournament}/${gameId}`] = {
             csa,
             jkf: player.toJKF(),
-            buoyTesuu: +(
-              player.kifu.moves[0].comments
-                ?.map(
-                  (v) =>
-                    v.match(/^buoy game starting with ([0-9]+) moves$/)?.[1]
-                )
-                ?.filter((v) => v)?.[0] ?? 0
-            ),
             tesuuMax: player.kifu.moves.length - 1,
             gameEnd: player.kifu.moves[
               player.kifu.moves.length - 1
@@ -220,49 +178,6 @@ export default createStore({
             })
             .then((rawlist) => {
               commit("mutList", { tournament, rawlist });
-              callback?.();
-            });
-        },
-        async fetchBuoy(
-          { commit, getters },
-          {
-            tournament,
-            callback,
-          }: {
-            tournament: string;
-            callback?: () => void;
-          }
-        ) {
-          // 50秒以内には再取得を試みない
-          const fetchTime = new Date().valueOf();
-          const lastCheckTime = getters.getBuoyCheckTime(tournament);
-          if (fetchTime >= lastCheckTime && fetchTime < lastCheckTime + 50000) {
-            return;
-          }
-          commit("mutBuoyCheckTime", { tournament, time: fetchTime });
-          // fetch実行
-          fetch(fetchGameBuoyTableUrl(tournament))
-            .then(async (response) => {
-              if (!response.ok) {
-                throw new Error(
-                  [
-                    `Fetch Response was not ok : ${response.status} ${response.statusText}`,
-                  ].join("\n")
-                );
-              }
-              const readAsText = (blob: Blob, encoding?: string) =>
-                new Promise((resolve) => {
-                  const reader = new FileReader();
-                  reader.onload = () => {
-                    resolve(reader.result);
-                  };
-                  reader.readAsText(blob, encoding);
-                });
-              const blob = await response.blob();
-              return readAsText(blob /*, "shift_jis"*/);
-            })
-            .then((rawbuoy) => {
-              commit("mutBuoy", { tournament, rawbuoy });
               callback?.();
             });
         },

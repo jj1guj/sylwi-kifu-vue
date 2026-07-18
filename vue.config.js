@@ -17,14 +17,6 @@ module.exports = {
       path: false,
     };
 
-    config.module.rules.push({
-      test: /\.hdr$/i,
-      type: "asset/resource",
-      generator: {
-        filename: "img/[name].[contenthash:8][ext]",
-      },
-    });
-
     if (IS_PROD) {
       config.plugins = [
         ...config.plugins,

@@ -7,11 +7,7 @@
     </p>
     <p>
       <a
-        :href="
-          props.tournament === 'floodgate'
-            ? `http://wdoor.c.u-tokyo.ac.jp/shogi/floodgate.html`
-            : `https://golan.sakura.ne.jp/denryusen/${props.tournament}/dr1_live.php`
-        "
+        href="https://wdoor.c.u-tokyo.ac.jp/shogi/floodgate.html"
         target="_blank"
         rel="noopener"
         >⇒ 棋戦サイト</a

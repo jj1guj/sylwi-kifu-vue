@@ -1,3 +1,0 @@
-- small_cathedral_*.hdr:
-  - License: CC0
-  - https://hdrihaven.com/hdri/?h=small_cathedral

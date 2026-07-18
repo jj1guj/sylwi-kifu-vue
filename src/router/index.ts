@@ -23,11 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Castle,
   },
   {
-    path: "/:tournament([\\w.+-]+)",
+    path: "/floodgate",
     name: "Tournament",
     component: Tournament,
     props: (route) => ({
-      tournament: route.params.tournament,
+      tournament: "floodgate",
       limitTimeDur: +(route.query.lt || Infinity),
       limitNumber: +(route.query.ln || 20),
       hideTags: route.query.tags === "0" || route.query.s === "1",
@@ -40,11 +40,11 @@ const routes: Array<RouteRecordRaw> = [
     }),
   },
   {
-    path: "/:tournament([\\w.+-]+)/multi",
+    path: "/floodgate/multi",
     name: "KifuMulti",
     component: KifuMulti,
     props: (route) => ({
-      tournament: route.params.tournament,
+      tournament: "floodgate",
       limitTimeDur: +(route.query.lt || Infinity),
       limitNumber: +(route.query.ln || Infinity),
       hideTags: route.query.tags === "0" || route.query.s === "1",
@@ -57,10 +57,14 @@ const routes: Array<RouteRecordRaw> = [
     }),
   },
   {
-    path: "/:tournament([\\w.+-]+)/:gameid([\\w.+-]+\\+\\d+)/:ply(\\d+)?",
+    path: "/floodgate/:gameid([\\w.+-]+\\+\\d+)/:ply(\\d+)?",
     name: "KifuSingle",
     component: KifuSingle,
-    props: true,
+    props: (route) => ({
+      tournament: "floodgate",
+      gameid: route.params.gameid,
+      ply: route.params.ply,
+    }),
   },
   {
     path: "/:pathMatch(.*)*",

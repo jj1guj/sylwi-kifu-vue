@@ -340,30 +340,6 @@ padding文字 `=` は使用しない実装を予定。
   sfen: `lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1`
   move: `none`
   psfenw-b64u: `LEmKRDDX5kR-acpEOPUiHiRD1Ih5ykQ41_ZEfGmKRDA`
-- 電竜戦 第3回予行演習 2回戦☗ほっしーdolphinタッグ-☖Viper 終局図
-  csa: https://golan.sakura.ne.jp/denryusen/dr1_test3/kifufiles/dr1t3t1+sg-2_hosshii_viper-300-2F+hosshii+viper+20200905203344.csa
-  kifu: https://golan.sakura.ne.jp/denryusen/dr1_test3/dist/denryusen_single.html#dr1t3t1+sg-2_hosshii_viper-300-2F+hosshii+viper+20200905203344
-  sfen: `1+B1k1G3/4PLL1K/+NGGSSSB+R+P/1NN+RN4/9/P3S4/1G1P5/9/L7L w 14P 1`
-  move: `177☗８一角成`
-  psfenw-b64u: `gVqgYH8Aw-APMOAEcaOA4_iA80B9PNDwNiDAAAAAAABJfwAlR`
-- 電竜戦 第3回予行演習 10回戦☗Daig振り飛車-☖ほっしーdolphinタッグ 終局図
-  csa: https://golan.sakura.ne.jp/denryusen/dr1_test3/kifufiles/dr1t3t1+sg-10_daigorilla_hosshii-300-2F+daigorilla+hosshii+20200906000224.csa
-  kifu: https://golan.sakura.ne.jp/denryusen/dr1_test3/dist/denryusen_single.html#dr1t3t1+sg-10_daigorilla_hosshii-300-2F+daigorilla+hosshii+20200906000224
-  sfen: `9/9/9/9/9/9/2k6/1r7/K8 b r2b4g4s4n4l18p 1`
-  move: `346☖８八飛不成`
-  psfenw-b64u: `UHgAAAAAAAAAAA_QB98-e973Oc5rWtYxjEkkkkkkkkm9jACqa`
-- 電竜戦 第4回予行演習2部 23回戦☗Sylwi-☖ほっしー水匠タッグ 終局図
-  csa: https://golan.sakura.ne.jp/denryusen/dr1_test4a/kifufiles/dr1t4+snc-23_sylwi_hosshii-300-2F+sylwi+hosshii+20201025090721.csa
-  kifu: https://golan.sakura.ne.jp/denryusen/dr1_test4a/dist/denryusen_single.html#dr1t4+snc-23_sylwi_hosshii-300-2F+sylwi+hosshii+20201025090721
-  sfen: `lr5nl/3sk1+S2/p2P1ps2/3Sp1p1p/PP1p1P1P1/1G4P1P/1K2P1N2/5G3/+bN1R4L w 2G2Pbnl2p 1`
-  move: `115☗６三歩`
-  psfenw-b64u: `xUuJKDDUQDrmUaBKDwSQOY4kfgA_RHjTFKB984B5rElhXgAjT`
-- 電竜戦 第4回予行演習2部 25回戦☗ほっしー水匠タッグ-☖スーパーうさぴょん2X 208手目
-  csa: https://golan.sakura.ne.jp/denryusen/dr1_test4a/kifufiles/dr1t4+snc-25_hosshii_superusa2x-300-2F+hosshii+superusa2x+20201025100533.csa
-  kifu: https://golan.sakura.ne.jp/denryusen/dr1_test4a/dist/denryusen_single.html#dr1t4+snc-25_hosshii_superusa2x-300-2F+hosshii+superusa2x+20201025100533
-  sfen: `5+RpG1/sp6K/ksn4G1/p1spp4/2p3+B1p/1GP+BP4/P4P3/3+n5/LN6L b RGSN2LP6p 1`
-  move: `208☖８三銀左上`
-  psfenw-b64u: `AZQkYePAJH0H8CASgCX03GvMwE8nho5khh85ikIAkkm3giQmQ`
 
 */
 

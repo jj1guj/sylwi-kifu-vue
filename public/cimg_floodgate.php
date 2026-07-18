@@ -59,7 +59,6 @@ $imx = 992; // 960 - 96;
 $imy = 496; // 540 - 54;
 $imxh = $imx / 2;
 $imyh = $imy / 2;
-//$im = imagecreatefrompng('img/denryu-board.png');
 $im  = imagecreatetruecolor($imx, $imy);
 // 白色
 $wc = imagecolorallocate($im, 255, 255, 255);

@@ -2,7 +2,6 @@
 import { defineComponent, SetupContext, h } from "vue";
 import { JKFPlayer } from "json-kifu-format";
 import { getTags } from "@/modules/castle";
-import { useStore } from "vuex";
 
 export default defineComponent({
   props: {
@@ -20,24 +19,14 @@ export default defineComponent({
     },
   },
   setup(props, ctx: SetupContext) {
-    const store = useStore();
-    if (props.tournament.startsWith("dr") && props.gameid.includes("+buoy_")) {
-      store.dispatch("shogiServer/fetchBuoy", { tournament: props.tournament });
-    }
     return {
       props,
       tesuuChange: (ply: number) => {
         ctx.emit("tesuu-change", { ply });
       },
-      store,
     };
   },
   render() {
-    const buoyentry = this.store.getters["shogiServer/getBuoy"](
-      this.props.tournament,
-      this.props.gameid.match(/^[A-Za-z0-9_-]+\+buoy_([A-Za-z0-9.-]+)/)?.[1] ??
-        ""
-    );
     return h(
       "div",
       {
@@ -46,10 +35,7 @@ export default defineComponent({
       getTags(
         this.props.jkfstr
           ? JKFPlayer.parseJKF(this.props.jkfstr)
-          : new JKFPlayer({ header: {}, moves: [{}] }),
-        {
-          buoy: buoyentry,
-        }
+          : new JKFPlayer({ header: {}, moves: [{}] })
       )
         .filter((tag) => !tag.hide)
         .map((tag) =>
