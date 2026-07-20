@@ -5,7 +5,7 @@
       <ul>
         <li>
           <a
-            href="https://wdoor.c.u-tokyo.ac.jp/shogi/floodgate.html"
+            href="https://wdoor.c.u-tokyo.ac.jp/shogi/"
             target="_blank"
             rel="noopener"
             >コンピュータ将棋連続対局場所 (floodgate)</a
