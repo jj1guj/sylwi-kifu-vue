@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import proxyRouter from "./proxy.js";
 import ogpRouter from "./ogp.js";
+import ogpImageRouter from "./ogp-image.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProduction = process.env.NODE_ENV === "production";
@@ -14,6 +15,7 @@ async function createServer() {
   // APIルート（Viteミドルウェアより先に登録）
   app.use("/api/floodgate", proxyRouter);
   app.use("/api/ogp", ogpRouter);
+  app.use("/api/ogp-image", ogpImageRouter);
 
   if (isProduction) {
     // 本番: ビルド済み静的ファイルを配信

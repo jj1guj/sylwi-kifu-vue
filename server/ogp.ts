@@ -72,7 +72,7 @@ router.get("/", (req: Request, res: Response) => {
   const p = (req.query.p as string) ?? "";
   const gi = ((req.query.gi as string) ?? "").replace(/ /g, "+");
 
-  const { p1, p2, gn, tn } = parseGameId(gi);
+  const { gn, tn } = parseGameId(gi);
 
   let tesuuStr = "";
   let mStr = "";
@@ -94,7 +94,7 @@ router.get("/", (req: Request, res: Response) => {
 
   const baseUrl = `${req.protocol}://${req.get("host")}`;
   const ogTitle = `floodgate ${escapeHtml(gn)} ${tesuuStr} ${mStr} まで`;
-  const ogImage = `${baseUrl}/api/ogp-image?p=${encodeURIComponent(p)}&p1=${encodeURIComponent(p1)}&p2=${encodeURIComponent(p2)}`;
+  const ogImage = `${baseUrl}/api/ogp-image?gi=${encodeURIComponent(gi)}&p=${encodeURIComponent(p)}`;
   // クエリ文字列の+はスペースにデコードされるので、giは先頭で+に復元済み
   const ogUrl = `${baseUrl}/#/${tn}/${gi}/${tesuu}`;
 
