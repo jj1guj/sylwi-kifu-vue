@@ -6,7 +6,7 @@
     </p>
     <p>
       <a
-        href="https://wdoor.c.u-tokyo.ac.jp/shogi/floodgate.html"
+        href="https://wdoor.c.u-tokyo.ac.jp/shogi/"
         target="_blank"
         rel="noopener"
         >⇒ 棋戦サイト</a
