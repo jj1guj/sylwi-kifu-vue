@@ -148,9 +148,9 @@
         <div v-if="data.showDiag">
           <img
             class="diag"
-            :src="`https://sylwi.mzr.jp/cimg_floodgate.php?p=${getPSfenWB64()}&p1=${encodeURIComponent(
-              data.p1
-            )}&p2=${encodeURIComponent(data.p2)}`"
+            :src="`/api/ogp-image?gi=${encodeURIComponent(
+              props.gameid
+            )}&p=${getPSfenWB64()}`"
           />
         </div>
         <div v-if="!props.hideComments">
