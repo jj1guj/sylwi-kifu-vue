@@ -21,7 +21,7 @@ async function createServer() {
     // 本番: ビルド済み静的ファイルを配信
     const distPath = path.resolve(__dirname, "../dist");
     app.use(express.static(distPath));
-    app.get("*", (_req, res) => {
+    app.get("/{*path}", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
   } else {
