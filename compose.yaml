@@ -6,4 +6,9 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+    volumes:
+      - cache:/app/cache
     restart: always
+
+volumes:
+  cache:
