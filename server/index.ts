@@ -1,6 +1,7 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import proxyRouter from "./proxy.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProduction = process.env.NODE_ENV === "production";
@@ -8,6 +9,9 @@ const port = Number(process.env.PORT) || 3000;
 
 async function createServer() {
   const app = express();
+
+  // APIルート（Viteミドルウェアより先に登録）
+  app.use("/api/floodgate", proxyRouter);
 
   if (isProduction) {
     // 本番: ビルド済み静的ファイルを配信
