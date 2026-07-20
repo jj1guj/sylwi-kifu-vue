@@ -132,7 +132,7 @@
           <button @click="doRotate" v-html="iconRotateRaw" title="盤面反転" />
           <button
             @click="doCopy"
-            v-html="iconCopyRaw"
+            v-html="data.kifuCopied ? iconCheckRaw : iconCopyRaw"
             title="棋譜をクリップボードにコピー"
             v-if="data.hasClipboard"
           />
@@ -525,6 +525,7 @@ export default defineComponent({
       updated: 0,
       showDiag: false,
       shareCopied: false,
+      kifuCopied: false,
       lastInGame: 0,
       p1: "",
       p2: "",
@@ -681,6 +682,8 @@ export default defineComponent({
             | undefined
             | { writeText(str: string): Promise<unknown> }
         )?.writeText(data.kifustr);
+        data.kifuCopied = true;
+        setTimeout(() => { data.kifuCopied = false; }, 2000);
       }
     };
     // 棋譜URLコピーボタン
