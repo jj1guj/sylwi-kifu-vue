@@ -1,6 +1,5 @@
 <template>
   <div class="single">
-    <PR />
     <GameSelect
       :tournament="data.tournament"
       :gameid="data.gameid"
@@ -30,7 +29,6 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import GameSelect from "@/components/GameSelect.vue";
 import Kifu from "@/components/Kifu.vue";
-import PR from "@/components/PR.vue";
 
 export default defineComponent({
   props: {
@@ -123,7 +121,6 @@ export default defineComponent({
   components: {
     GameSelect,
     Kifu,
-    PR,
   },
 });
 </script>

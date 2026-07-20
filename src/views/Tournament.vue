@@ -1,6 +1,5 @@
 <template>
   <div class="tournament">
-    <PR />
     <h1>tournament : {{ props.tournament }}</h1>
     <p>
       <GameSelect :tournament="props.tournament" @change-game="changeGame" />
@@ -62,7 +61,6 @@ import { useRouter } from "vue-router";
 import GameSelect from "@/components/GameSelect.vue";
 import GameFlex from "@/components/GameFlex.vue";
 import GameList from "@/components/GameList.vue";
-import PR from "@/components/PR.vue";
 
 export default defineComponent({
   props: {
@@ -135,7 +133,6 @@ export default defineComponent({
     GameSelect,
     GameFlex,
     GameList,
-    PR,
   },
 });
 </script>

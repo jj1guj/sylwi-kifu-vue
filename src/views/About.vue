@@ -1,7 +1,6 @@
 <template>
   <div class="about">
     <div class="append">
-      <PR />
       <h3>Computer Shogi</h3>
       <ul>
         <li>
@@ -32,7 +31,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import PR from "@/components/PR.vue";
 import licenses from "@/assets/licenses.json";
 
 export default defineComponent({
@@ -42,9 +40,6 @@ export default defineComponent({
       props,
       licenses,
     };
-  },
-  components: {
-    PR,
   },
 });
 </script>

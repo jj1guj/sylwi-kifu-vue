@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <PR />
     <ul>
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/about">About</router-link></li>
@@ -20,12 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import PR from "@/components/PR.vue";
 
 export default defineComponent({
   name: "Home",
-  components: {
-    PR,
-  },
 });
 </script>
