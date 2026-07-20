@@ -1,6 +1,6 @@
 # sylwi-kifu-vue
 
-https://sylwi.mzr.jp
+https://sylwi.jj1guj.net
 
 ## Project setup
 ```
