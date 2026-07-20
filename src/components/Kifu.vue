@@ -142,6 +142,7 @@
             title="棋譜をダウンロード"
           />
           <button @click="doTweet" v-html="iconTwitterRaw" title="ツイート" />
+          <button @click="doShareCopy" v-html="data.shareCopied ? iconCheckRaw : iconShareRaw" title="シェア用テキストをコピー" />
           <button @click="doDiag" v-html="iconBrushRaw" title="局面図" />
         </div>
         <div v-if="data.showDiag">
@@ -446,6 +447,8 @@ import iconChevronsRightRaw from "@tabler/icons/icons/chevrons-right.svg?raw";
 import iconArrowBarToRightRaw from "@tabler/icons/icons/arrow-bar-to-right.svg?raw";
 import iconRotateRaw from "@tabler/icons/icons/rotate.svg?raw";
 import iconTwitterRaw from "@tabler/icons/icons/brand-twitter.svg?raw";
+import iconShareRaw from "@tabler/icons/icons/share.svg?raw";
+import iconCheckRaw from "@tabler/icons/icons/check.svg?raw";
 import iconCopyRaw from "@tabler/icons/icons/copy.svg?raw";
 import iconDownloadRaw from "@tabler/icons/icons/download.svg?raw";
 import iconLogoutRaw from "@tabler/icons/icons/logout.svg?raw";
@@ -521,6 +524,7 @@ export default defineComponent({
       activated: false,
       updated: 0,
       showDiag: false,
+      shareCopied: false,
       lastInGame: 0,
       p1: "",
       p2: "",
@@ -726,6 +730,23 @@ export default defineComponent({
         "noopener=yes"
       );
     };
+    const doShareFedi = () => {
+      // unused, kept for compatibility
+    };
+    const doShareCopy = async () => {
+      const player = JKFPlayer.parseJKF(data.jkfstr);
+      const readableKifu = player.getReadableKifu(data.tesuu);
+      const shareUrl = new URL(
+        `./api/ogp?gi=${encodeURIComponent(
+          props.gameid
+        )}&p=${getPSfenWB64()}`,
+        window.location.href
+      ).href;
+      const text = `${props.gamename} ${data.tesuu}手目 ${readableKifu}\n#将棋 #floodgate\n${shareUrl}`;
+      await navigator.clipboard.writeText(text);
+      data.shareCopied = true;
+      setTimeout(() => { data.shareCopied = false; }, 2000);
+    };
     const doDiag = () => {
       data.showDiag = !data.showDiag;
     };
@@ -767,6 +788,8 @@ export default defineComponent({
       moveToReadableKifu,
       doRotate,
       doTweet,
+      doShareFedi,
+      doShareCopy,
       doInfoDiag,
       doCopy,
       doCopyURL,
@@ -786,6 +809,8 @@ export default defineComponent({
       iconArrowBarToRightRaw,
       iconRotateRaw,
       iconTwitterRaw,
+      iconShareRaw,
+      iconCheckRaw,
       iconCopyRaw,
       iconDownloadRaw,
       iconLogoutRaw,
