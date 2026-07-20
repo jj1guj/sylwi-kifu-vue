@@ -5,8 +5,8 @@
   "author": "Mizar",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "serve": "vite",
+    "dev": "tsx server/index.ts",
+    "serve": "tsx server/index.ts",
     "typecheck": "vue-tsc --noEmit",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@tabler/icons": "^1.38.1",
+    "express": "^5.2.1",
     "json-kifu-format": "^1.2.7",
     "kifu-for-js": "^2.2.2",
     "noto-sans-cjk-jp": "^1.0.1",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@gfx/zopfli": "^1.0.15",
+    "@types/express": "^5.0.6",
     "@types/node": "^24",
     "@typescript-eslint/eslint-plugin": "^8.64.0",
     "@typescript-eslint/parser": "^8.64.0",
