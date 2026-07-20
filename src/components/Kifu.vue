@@ -706,13 +706,9 @@ export default defineComponent({
       const tweetProp = {
         text: `${props.gamename} ${data.tesuu}手目 ${readableKifu}\n\n\n`,
         url: new URL(
-          `./floodgate.php?tn=${props.tournament}&gi=${
+          `./api/ogp?gi=${encodeURIComponent(
             props.gameid
-          }&p=${getPSfenWB64()}&gn=${encodeURIComponent(
-            props.gamename || ""
-          )}&p1=${encodeURIComponent(data.p1)}&p2=${encodeURIComponent(
-            data.p2
-          )}`,
+          )}&p=${getPSfenWB64()}`,
           window.location.href
         ).href,
         hashtags: "将棋,floodgate",
