@@ -436,6 +436,12 @@ div.kifu {
     }
   }
 }
+
+@media (orientation: landscape) and (max-height: 430px) {
+  .single > div.kifu {
+    zoom: min(1, calc((100dvh - 75px) / 590px));
+  }
+}
 </style>
 
 <script lang="ts">
