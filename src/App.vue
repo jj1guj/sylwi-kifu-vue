@@ -55,6 +55,6 @@ body {
       color: #42b983;
     }
   }
-  height: min(3vh, 1.5em);
+  min-height: min(3vh, 1.5em);
 }
 </style>
