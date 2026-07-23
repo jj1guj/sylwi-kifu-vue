@@ -6,6 +6,12 @@
   </select>
 </template>
 
+<style lang="scss">
+select.kifulist {
+  max-width: 100%;
+}
+</style>
+
 <script lang="ts">
 import { defineComponent, SetupContext, reactive, watch, computed } from "vue";
 import { useStore } from "vuex";

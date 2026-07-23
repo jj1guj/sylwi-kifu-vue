@@ -424,6 +424,18 @@ div.kifu {
     }
   }
 }
+
+@media (max-width: 430px) {
+  div.kifu {
+    width: 100%;
+    container-type: inline-size;
+
+    > * {
+      width: 570px;
+      zoom: calc(100cqw / 570px);
+    }
+  }
+}
 </style>
 
 <script lang="ts">
