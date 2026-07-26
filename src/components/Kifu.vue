@@ -142,8 +142,33 @@
             title="棋譜をダウンロード"
           />
           <button @click="doTweet" v-html="iconTwitterRaw" title="ツイート" />
-          <button @click="doShareCopy" v-html="data.shareCopied ? iconCheckRaw : iconShareRaw" title="シェア用テキストをコピー" />
+          <button
+            @click="doShareCopy"
+            v-html="data.shareCopyFailed ? iconAlertTriangleRaw : data.shareCopied ? iconCheckRaw : iconShareRaw"
+            title="シェア用テキストをコピー"
+          />
           <button @click="doDiag" v-html="iconBrushRaw" title="局面図" />
+          <div
+            v-if="data.shareCopyFailed"
+            class="share-copy-fallback"
+            role="status"
+            aria-live="polite"
+          >
+            <div class="share-copy-fallback-header">
+              <span>自動コピーできませんでした。下のテキストを選択してコピーしてください。</span>
+              <button
+                @click="closeShareCopyFallback"
+                v-html="iconXRaw"
+                title="手動コピー欄を閉じる"
+              />
+            </div>
+            <textarea
+              :value="data.shareCopyText"
+              @click="selectShareCopyText"
+              aria-label="手動コピー用シェアテキスト"
+              readonly
+            ></textarea>
+          </div>
         </div>
         <div v-if="data.showDiag">
           <img
@@ -402,6 +427,28 @@ div.kifu {
         height: 26px;
         width: 84px;
       }
+      .share-copy-fallback {
+        background-color: #fff4e5;
+        box-sizing: border-box;
+        color: #b42318;
+        font-size: 14px;
+        margin-top: 4px;
+        padding: 6px;
+        width: 100%;
+
+        .share-copy-fallback-header {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        textarea {
+          font-size: 16px;
+          margin-top: 4px;
+          min-height: 5em;
+          width: 100%;
+        }
+      }
     }
     textarea.comments {
       width: 100%;
@@ -466,6 +513,8 @@ import iconArrowBarToRightRaw from "@tabler/icons/icons/arrow-bar-to-right.svg?r
 import iconRotateRaw from "@tabler/icons/icons/rotate.svg?raw";
 import iconTwitterRaw from "@tabler/icons/icons/brand-twitter.svg?raw";
 import iconShareRaw from "@tabler/icons/icons/share.svg?raw";
+import iconAlertTriangleRaw from "@tabler/icons/icons/alert-triangle.svg?raw";
+import iconXRaw from "@tabler/icons/icons/x.svg?raw";
 import iconCheckRaw from "@tabler/icons/icons/check.svg?raw";
 import iconCopyRaw from "@tabler/icons/icons/copy.svg?raw";
 import iconDownloadRaw from "@tabler/icons/icons/download.svg?raw";
@@ -543,6 +592,8 @@ export default defineComponent({
       updated: 0,
       showDiag: false,
       shareCopied: false,
+      shareCopyFailed: false,
+      shareCopyText: "",
       kifuCopied: false,
       lastInGame: 0,
       p1: "",
@@ -754,6 +805,15 @@ export default defineComponent({
     const doShareFedi = () => {
       // unused, kept for compatibility
     };
+    const closeShareCopyFallback = () => {
+      data.shareCopyFailed = false;
+      data.shareCopyText = "";
+    };
+    const selectShareCopyText = (event: Event) => {
+      if (event.target instanceof HTMLTextAreaElement) {
+        event.target.select();
+      }
+    };
     const doShareCopy = async () => {
       const player = JKFPlayer.parseJKF(data.jkfstr);
       const readableKifu = player.getReadableKifu(data.tesuu);
@@ -764,7 +824,21 @@ export default defineComponent({
         window.location.href
       ).href;
       const text = `${props.gamename} ${data.tesuu}手目 ${readableKifu}\n#将棋 #floodgate\n${shareUrl}`;
-      await navigator.clipboard.writeText(text);
+
+      try {
+        if (!navigator.clipboard) {
+          throw new Error("Clipboard API is unavailable");
+        }
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        console.error("Failed to copy share text with Clipboard API", error);
+        data.shareCopied = false;
+        data.shareCopyFailed = true;
+        data.shareCopyText = text;
+        return;
+      }
+
+      closeShareCopyFallback();
       data.shareCopied = true;
       setTimeout(() => { data.shareCopied = false; }, 2000);
     };
@@ -811,6 +885,8 @@ export default defineComponent({
       doTweet,
       doShareFedi,
       doShareCopy,
+      closeShareCopyFallback,
+      selectShareCopyText,
       doInfoDiag,
       doCopy,
       doCopyURL,
@@ -831,6 +907,8 @@ export default defineComponent({
       iconRotateRaw,
       iconTwitterRaw,
       iconShareRaw,
+      iconAlertTriangleRaw,
+      iconXRaw,
       iconCheckRaw,
       iconCopyRaw,
       iconDownloadRaw,
