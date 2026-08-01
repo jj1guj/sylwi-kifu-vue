@@ -51,12 +51,21 @@
           "
         >
           <div>
-            <div class="inlineblock players">
+            <div
+              class="inlineblock players"
+              :class="{ 'has-rating': data.blackRate || data.whiteRate }"
+            >
               <Mochi
                 :jkf="data.jkfstr"
                 :tesuu="data.tesuu"
                 :rotated="data.rotated"
                 :side="1"
+                :rating="data.rotated ? data.blackRate : data.whiteRate"
+                :estimated="
+                  data.rotated
+                    ? data.blackRateEstimated
+                    : data.whiteRateEstimated
+                "
                 @tesuu-diff="tesuuDiff"
               />
               <div class="mochi panel tesuu">
@@ -76,7 +85,10 @@
             @tesuu-diff="tesuuDiff"
           />
           <div>
-            <div class="inlineblock players">
+            <div
+              class="inlineblock players"
+              :class="{ 'has-rating': data.blackRate || data.whiteRate }"
+            >
               <div class="mochi info">
                 <Info :jkf="data.jkfstr" head="{}" />
               </div>
@@ -85,6 +97,12 @@
                 :tesuu="data.tesuu"
                 :rotated="data.rotated"
                 :side="0"
+                :rating="data.rotated ? data.whiteRate : data.blackRate"
+                :estimated="
+                  data.rotated
+                    ? data.whiteRateEstimated
+                    : data.blackRateEstimated
+                "
                 @tesuu-diff="tesuuDiff"
               />
             </div>
@@ -287,8 +305,29 @@ div.kifu {
             overflow-wrap: break-word;
           }
           .points {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
             text-align: center;
             background-color: #ddd;
+            font-variant-numeric: tabular-nums;
+            .rating-label {
+              font-size: 9px;
+              font-weight: bold;
+              color: #d9dde0;
+            }
+            .rating-value {
+              font-size: 14px;
+              font-weight: bold;
+            }
+          }
+          .points.rating {
+            min-height: 24px;
+            padding: 2px 4px;
+            box-sizing: border-box;
+            color: #fff;
+            background-color: #3f454a;
           }
           .mochimain {
             width: 100%;
@@ -346,6 +385,9 @@ div.kifu {
         .mochi.panel {
           height: 160px;
         }
+        &.has-rating .mochi.panel {
+          height: 136px;
+        }
         .mochi.info {
           overflow-y: scroll;
           font-size: 13px;
@@ -366,6 +408,9 @@ div.kifu {
               word-wrap: break-word;
             }
           }
+        }
+        &.has-rating .mochi.info {
+          height: 136px;
         }
       }
       .ban {
@@ -598,6 +643,10 @@ export default defineComponent({
       lastInGame: 0,
       p1: "",
       p2: "",
+      blackRate: "",
+      whiteRate: "",
+      blackRateEstimated: false,
+      whiteRateEstimated: false,
     });
     const store = useStore();
     const getPSfenWB64 = (): string => {
@@ -698,6 +747,10 @@ export default defineComponent({
         data.activated,
         data.p1,
         data.p2,
+        data.blackRate,
+        data.whiteRate,
+        data.blackRateEstimated,
+        data.whiteRateEstimated,
       ] = [
         store.getters["shogiServer/getRawCsa"](tournament, gameId),
         "",
@@ -712,6 +765,16 @@ export default defineComponent({
         true,
         store.getters["shogiServer/getPlayer1"](tournament, gameId),
         store.getters["shogiServer/getPlayer2"](tournament, gameId),
+        store.getters["shogiServer/getBlackRate"](tournament, gameId),
+        store.getters["shogiServer/getWhiteRate"](tournament, gameId),
+        store.getters["shogiServer/getBlackRateEstimated"](
+          tournament,
+          gameId
+        ),
+        store.getters["shogiServer/getWhiteRateEstimated"](
+          tournament,
+          gameId
+        ),
       ];
       setTimeout(() => {
         // TesuuSel用の遅延更新呼び出し

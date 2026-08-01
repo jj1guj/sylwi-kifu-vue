@@ -60,9 +60,74 @@ export default createStore({
           (tournament: string, gameId: string): string => {
             return state.csa[`${tournament}/${gameId}`]?.p2 ?? "";
           },
+        getBlackRate:
+          (state) =>
+          (tournament: string, gameId: string): string => {
+            const actualRate = state.csa[`${tournament}/${gameId}`]?.blackRate;
+            return (
+              actualRate ||
+              (state.gameList[tournament]?.list.find(
+                (game: { gameId: string }) => game.gameId === gameId
+              )?.blackEstimatedRate ?? "")
+            );
+          },
+        getWhiteRate:
+          (state) =>
+          (tournament: string, gameId: string): string => {
+            const actualRate = state.csa[`${tournament}/${gameId}`]?.whiteRate;
+            return (
+              actualRate ||
+              (state.gameList[tournament]?.list.find(
+                (game: { gameId: string }) => game.gameId === gameId
+              )?.whiteEstimatedRate ?? "")
+            );
+          },
+        getBlackRateEstimated:
+          (state) =>
+          (tournament: string, gameId: string): boolean => {
+            return (
+              !state.csa[`${tournament}/${gameId}`]?.blackRate &&
+              !!state.gameList[tournament]?.list.find(
+                (game: { gameId: string }) => game.gameId === gameId
+              )?.blackEstimatedRate
+            );
+          },
+        getWhiteRateEstimated:
+          (state) =>
+          (tournament: string, gameId: string): boolean => {
+            return (
+              !state.csa[`${tournament}/${gameId}`]?.whiteRate &&
+              !!state.gameList[tournament]?.list.find(
+                (game: { gameId: string }) => game.gameId === gameId
+              )?.whiteEstimatedRate
+            );
+          },
       },
       mutations: {
         mutList(state, { tournament, rawlist }) {
+          const estimatedRatesByTime = new Map<string, Map<string, string>>();
+          const gameStartTimes = new Map<string, string>();
+          if (tournament === "floodgate") {
+            rawlist.split("\n").forEach((line: string) => {
+              const estimatedRate = line.match(
+                /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d) \[INFO\] Floodgate: (?:No active opponent found\. )?Estimated ([\w.-]+)'s rate: (\d+)$/
+              );
+              if (estimatedRate) {
+                const rates =
+                  estimatedRatesByTime.get(estimatedRate[1]) ??
+                  new Map<string, string>();
+                rates.set(estimatedRate[2], estimatedRate[3]);
+                estimatedRatesByTime.set(estimatedRate[1], rates);
+              }
+
+              const gameStarted = line.match(
+                /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d) \[INFO\] game started ((?:[\w.-]+\+){4}\d+)$/
+              );
+              if (gameStarted) {
+                gameStartTimes.set(gameStarted[2], gameStarted[1]);
+              }
+            });
+          }
           const list = (
             tournament === "floodgate"
               ? rawlist
@@ -120,7 +185,18 @@ export default createStore({
               ) =>
                 parseFloat(b.gameId.substring(b.gameId.length - 14)) -
                 parseFloat(a.gameId.substring(a.gameId.length - 14))
-            );
+            )
+            .map((game: { gameId: string; gameName: string }) => {
+              const players = game.gameId.split("+");
+              const estimatedRates = estimatedRatesByTime.get(
+                gameStartTimes.get(game.gameId) ?? ""
+              );
+              return {
+                ...game,
+                blackEstimatedRate: estimatedRates?.get(players[2]) ?? "",
+                whiteEstimatedRate: estimatedRates?.get(players[3]) ?? "",
+              };
+            });
           state.gameList[tournament] = {
             raw: rawlist,
             list,
@@ -133,6 +209,8 @@ export default createStore({
         },
         mutCsa(state, { tournament, gameId, csa }) {
           const player = JKFPlayer.parseCSA(csa);
+          const blackRate = csa.match(/^'black_rate:[^\r\n]*:(\d+)\r?$/m);
+          const whiteRate = csa.match(/^'white_rate:[^\r\n]*:(\d+)\r?$/m);
           state.csa[`${tournament}/${gameId}`] = {
             csa,
             jkf: player.toJKF(),
@@ -143,6 +221,8 @@ export default createStore({
             updated: new Date().valueOf(),
             p1: player.kifu.header.先手 ?? "",
             p2: player.kifu.header.後手 ?? "",
+            blackRate: blackRate?.[1] ?? "",
+            whiteRate: whiteRate?.[1] ?? "",
           };
         },
       },

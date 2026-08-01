@@ -22,6 +22,16 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    rating: {
+      type: String,
+      required: false,
+      default: () => "",
+    },
+    estimated: {
+      type: Boolean,
+      required: false,
+      default: () => false,
+    },
     forcepoint: {
       typr: Boolean,
       required: false,
@@ -189,11 +199,28 @@ export default defineComponent({
         h(
           "div",
           {
-            className: "points",
+            className: `points${this.props.rating ? " rating" : ""}`,
+            title: this.props.estimated ? "推定レーティング" : "レーティング",
           },
-          this.props.forcepoint || getEntered(color)
-            ? `${getPoint(color)}点${getPieces(color)}枚`
-            : ""
+          [
+            this.props.rating
+              ? h(
+                  "span",
+                  { className: "rating-label" },
+                  this.props.estimated ? "EST." : "RATING"
+                )
+              : null,
+            this.props.rating
+              ? h(
+                  "span",
+                  { className: "rating-value" },
+                  Number(this.props.rating).toLocaleString("en-US")
+                )
+              : null,
+            this.props.forcepoint || getEntered(color)
+              ? h("span", {}, `${getPoint(color)}点${getPieces(color)}枚`)
+              : null,
+          ]
         ),
         h(
           "div",
