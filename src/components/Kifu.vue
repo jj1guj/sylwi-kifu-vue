@@ -329,6 +329,11 @@ div.kifu {
             color: #fff;
             background-color: #3f454a;
           }
+          .entering-status {
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+          }
           .mochimain {
             width: 100%;
             height: 152px;
@@ -411,6 +416,60 @@ div.kifu {
         }
         &.has-rating .mochi.info {
           height: 136px;
+        }
+      }
+      &:has(.points.entered) .players {
+        .mochi {
+          .points {
+            box-sizing: border-box;
+            height: 22px;
+          }
+          .points.entered .entering-status {
+            background-color: #dce8e6;
+            color: #263238;
+          }
+          .mochimain {
+            height: 130px;
+          }
+        }
+        &.has-rating .mochi {
+          .points.rating {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 20px 24px;
+            column-gap: 4px;
+            gap: 0 4px;
+            height: 46px;
+            padding: 2px 4px 0;
+            justify-content: stretch;
+            background: linear-gradient(
+              to bottom,
+              #3f454a 0,
+              #3f454a 22px,
+              #eee 22px,
+              #eee 100%
+            );
+            .rating-label {
+              justify-self: end;
+            }
+            .rating-value {
+              justify-self: start;
+            }
+            .entering-status {
+              align-self: stretch;
+              display: flex;
+              grid-column: 1 / -1;
+              align-items: center;
+              justify-content: center;
+              line-height: 24px;
+              margin: 0 -4px;
+              background-color: #dce8e6;
+              color: #263238;
+            }
+          }
+          .mochimain {
+            height: 131px;
+          }
         }
       }
       .ban {
