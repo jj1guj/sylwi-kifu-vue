@@ -418,22 +418,20 @@ div.kifu {
           height: 136px;
         }
       }
-      &:has(.points.entered) .players {
+      .players {
         .mochi {
-          .points {
+          .points.entered {
             box-sizing: border-box;
             height: 22px;
-          }
-          .points.entered .entering-status {
             background-color: #dce8e6;
             color: #263238;
           }
-          .mochimain {
+          .points.entered + .mochimain {
             height: 130px;
           }
         }
         &.has-rating .mochi {
-          .points.rating {
+          .points.rating.entered {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 20px 24px;
@@ -442,6 +440,7 @@ div.kifu {
             height: 46px;
             padding: 2px 4px 0;
             justify-content: stretch;
+            color: #fff;
             background: linear-gradient(
               to bottom,
               #3f454a 0,
@@ -467,7 +466,7 @@ div.kifu {
               color: #263238;
             }
           }
-          .mochimain {
+          .points.rating.entered + .mochimain {
             height: 131px;
           }
         }
