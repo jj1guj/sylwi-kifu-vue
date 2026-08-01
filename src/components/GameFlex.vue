@@ -19,12 +19,8 @@ div.boardset-container {
 <script lang="ts">
 import { defineComponent, VNode, reactive, h, watch, computed } from "vue";
 import Kifu from "@/components/Kifu.vue";
+import { GameListEntry, includesPlayerName } from "@/modules/game";
 import { useStore } from "vuex";
-
-type GameObjType = {
-  gameId: string;
-  gameName: string;
-};
 
 export default defineComponent({
   props: {
@@ -81,11 +77,11 @@ export default defineComponent({
   setup(props) {
     const data = reactive({
       intervalId: 0,
-      gameList: [] as GameObjType[],
+      gameList: [] as GameListEntry[],
       error: "",
     });
     const store = useStore();
-    const filterGameList = (gameList: GameObjType[]): GameObjType[] => {
+    const filterGameList = (gameList: GameListEntry[]): GameListEntry[] => {
       let _gameList = [...gameList];
       const gameIdToDtValue = (gameid: string): number => {
         return new Date(
@@ -116,8 +112,8 @@ export default defineComponent({
         ).valueOf();
       };
       if (props.gameNameInclude) {
-        _gameList = _gameList.filter(
-          (e) => e.gameName.indexOf(props.gameNameInclude) >= 0
+        _gameList = _gameList.filter((game) =>
+          includesPlayerName(game, props.gameNameInclude)
         );
       }
       if (props.gameIdInclude) {
