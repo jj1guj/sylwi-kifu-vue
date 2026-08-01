@@ -176,6 +176,7 @@ export default defineComponent({
             )
         )
       );
+      const entered = this.props.forcepoint || getEntered(color);
     return h(
       "div",
       {
@@ -199,7 +200,9 @@ export default defineComponent({
         h(
           "div",
           {
-            className: `points${this.props.rating ? " rating" : ""}`,
+            className: `points${this.props.rating ? " rating" : ""}${
+              entered ? " entered" : ""
+            }`,
             title: this.props.estimated ? "推定レーティング" : "レーティング",
           },
           [
@@ -217,8 +220,12 @@ export default defineComponent({
                   Number(this.props.rating).toLocaleString("en-US")
                 )
               : null,
-            this.props.forcepoint || getEntered(color)
-              ? h("span", {}, `${getPoint(color)}点${getPieces(color)}枚`)
+            entered
+              ? h(
+                  "span",
+                  { className: "entering-status" },
+                  `入玉 ${getPoint(color)}点・${getPieces(color)}枚`
+                )
               : null,
           ]
         ),
