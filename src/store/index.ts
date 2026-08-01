@@ -106,11 +106,11 @@ export default createStore({
       mutations: {
         mutList(state, { tournament, rawlist }) {
           const estimatedRatesByTime = new Map<string, Map<string, string>>();
-          const gameStartTimes = new Map<string, string>();
+          const gameCreatedTimes = new Map<string, string>();
           if (tournament === "floodgate") {
             rawlist.split("\n").forEach((line: string) => {
               const estimatedRate = line.match(
-                /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d) \[INFO\] Floodgate: (?:No active opponent found\. )?Estimated ([\w.-]+)'s rate: (\d+)$/
+                /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d) \[INFO\] Floodgate: (?:(?:No active opponent found\. )?Estimated|Without any valid games in history, estimated) ([\w.-]+)'s rate: (\d+)$/
               );
               if (estimatedRate) {
                 const rates =
@@ -120,11 +120,11 @@ export default createStore({
                 estimatedRatesByTime.set(estimatedRate[1], rates);
               }
 
-              const gameStarted = line.match(
-                /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d) \[INFO\] game started ((?:[\w.-]+\+){4}\d+)$/
+              const gameCreated = line.match(
+                /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d) \[INFO\] game created ((?:[\w.-]+\+){4}\d+)$/
               );
-              if (gameStarted) {
-                gameStartTimes.set(gameStarted[2], gameStarted[1]);
+              if (gameCreated) {
+                gameCreatedTimes.set(gameCreated[2], gameCreated[1]);
               }
             });
           }
@@ -189,7 +189,7 @@ export default createStore({
             .map((game: { gameId: string; gameName: string }) => {
               const players = game.gameId.split("+");
               const estimatedRates = estimatedRatesByTime.get(
-                gameStartTimes.get(game.gameId) ?? ""
+                gameCreatedTimes.get(game.gameId) ?? ""
               );
               return {
                 ...game,
