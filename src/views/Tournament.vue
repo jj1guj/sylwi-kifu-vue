@@ -210,7 +210,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, computed, ref, watch } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import iconSearchRaw from "@tabler/icons/icons/search.svg?raw";
 import iconXRaw from "@tabler/icons/icons/x.svg?raw";
@@ -272,6 +272,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const route = useRoute();
     const router = useRouter();
     const store = useStore();
     const playerNameQuery = ref(props.gameNameInclude);
@@ -298,6 +299,22 @@ export default defineComponent({
         playerNameQuery.value = gameNameInclude;
       }
     );
+    watch(normalizedPlayerNameQuery, (playerName) => {
+      const currentPlayerName = Array.isArray(route.query.name)
+        ? route.query.name[0] ?? ""
+        : route.query.name ?? "";
+      if (playerName === currentPlayerName) {
+        return;
+      }
+
+      const query = { ...route.query };
+      if (playerName) {
+        query.name = playerName;
+      } else {
+        delete query.name;
+      }
+      void router.replace({ query });
+    });
     const changeGame = (msg: { tournament: string; gameid: string }) => {
       router.push(`/${msg.tournament}/${msg.gameid}`);
     };
