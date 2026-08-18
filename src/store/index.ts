@@ -1,4 +1,5 @@
 import { fetchGameListMirrorUrl, getKifuMirrorUrl } from "@/modules/kifuurl";
+import { formatFloodgateGameName } from "@/modules/game";
 import { JKFPlayer } from "json-kifu-format";
 import { createStore } from "vuex";
 
@@ -140,19 +141,7 @@ export default createStore({
                   .filter((s: RegExpMatchArray | null) => s)
                   .map((s: RegExpMatchArray) => ({
                     gameId: s[1],
-                    gameName: `☗${s[1].split("+")[2]} ☖${
-                      s[1].split("+")[3]
-                    } (${s[1].split("+")[4].substring(0, 4)}-${s[1]
-                      .split("+")[4]
-                      .substring(4, 6)}-${s[1]
-                      .split("+")[4]
-                      .substring(6, 8)} ${s[1]
-                      .split("+")[4]
-                      .substring(8, 10)}:${s[1]
-                      .split("+")[4]
-                      .substring(10, 12)}:${s[1]
-                      .split("+")[4]
-                      .substring(12, 14)})`,
+                    gameName: formatFloodgateGameName(s[1]),
                   }))
               : rawlist
                   .split("\n")
