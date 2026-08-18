@@ -24,11 +24,11 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, reactive, watch, computed } from "vue";
+import { defineComponent, reactive, watch } from "vue";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
 import GameSelect from "@/components/GameSelect.vue";
 import Kifu from "@/components/Kifu.vue";
+import { formatFloodgateGameName } from "@/modules/game";
 
 export default defineComponent({
   props: {
@@ -62,16 +62,7 @@ export default defineComponent({
       ply: props.ply ? parseInt(props.ply, 10) : NaN,
     });
     const router = useRouter();
-    const store = useStore();
-    const gameList = computed(() =>
-      store.getters["shogiServer/getList"](props.tournament)
-    );
-    const getGameName = () => {
-      const res = gameList.value.filter(
-        ({ gameId }: { gameId: string }) => gameId === props.gameid
-      );
-      return res && res.length > 0 ? res[0].gameName : "???";
-    };
+    const getGameName = () => formatFloodgateGameName(props.gameid);
     const changeGame = (msg: {
       tournament: string;
       gameid: string;
