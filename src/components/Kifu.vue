@@ -290,6 +290,8 @@ div.kifu {
         display: inline-block;
       }
       .players {
+        display: flex;
+        flex-direction: column;
         height: 100%;
         width: 120px;
         .mochi {
@@ -336,7 +338,7 @@ div.kifu {
           }
           .mochimain {
             width: 100%;
-            height: 152px;
+            height: 165px;
             margin-top: auto;
             margin-bottom: 0;
             img {
@@ -388,15 +390,14 @@ div.kifu {
           }
         }
         .mochi.panel {
-          height: 160px;
-        }
-        &.has-rating .mochi.panel {
-          height: 136px;
+          flex: 1 1 0;
+          min-height: 0;
         }
         .mochi.info {
+          flex: 1 1 0;
+          min-height: 0;
           overflow-y: scroll;
           font-size: 13px;
-          height: 160px;
           dl {
             margin-block-start: 0;
             margin-block-end: 0;
@@ -414,9 +415,6 @@ div.kifu {
             }
           }
         }
-        &.has-rating .mochi.info {
-          height: 136px;
-        }
       }
       .players {
         .mochi {
@@ -425,9 +423,6 @@ div.kifu {
             height: 22px;
             background-color: #dce8e6;
             color: #263238;
-          }
-          .points.entered + .mochimain {
-            height: 130px;
           }
         }
         &.has-rating .mochi {
@@ -465,9 +460,6 @@ div.kifu {
               background-color: #dce8e6;
               color: #263238;
             }
-          }
-          .points.rating.entered + .mochimain {
-            height: 131px;
           }
         }
       }
