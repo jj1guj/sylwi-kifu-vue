@@ -1609,12 +1609,32 @@ export default defineComponent({
     const remainTimes = player.kifu.moves.map((v, i) =>
       v.time ? remainTimeStr(i, v.time) : ""
     );
-    const remainTimesB = remainTimes.filter(
-      (v, i) => i > 0 && i % 2 === 1 && v !== ""
-    );
-    const remainTimesW = remainTimes.filter(
-      (v, i) => i > 0 && i % 2 === 0 && v !== ""
-    );
+
+    const initialRemainTime = (() => {
+      const remain = timeMan.base + timeMan.byoyomi;
+      const h = Math.floor(remain / 3600);
+      const m = Math.floor((remain % 3600) / 60);
+      const s = remain % 60;
+      return timeFmt({ h, m, s });
+    })();
+
+    const remainTimeAt = (parity: number): string => {
+      for (
+        let i = Math.min(tesuu, remainTimes.length - 1);
+        i > 0;
+        i -= 1
+      ) {
+        if (i % 2 === parity && remainTimes[i]) {
+          return remainTimes[i];
+        }
+      }
+
+      return initialRemainTime;
+    };
+
+    const remainTimeB = remainTimeAt(1);
+    const remainTimeW = remainTimeAt(0);
+
     return doWrite({
       maxPly: maxPly,
       width: width,
@@ -1689,16 +1709,12 @@ export default defineComponent({
             Math.max(timeMan.base + timeMan.increment, 60)
           : Number.NaN
       ),
-      textSideB: `☗${player.kifu.header.先手 || player.kifu.header.下手 || ""}${
-        remainTimesB.length > 0
-          ? `; remain ${remainTimesB[remainTimesB.length - 1]}`
-          : ""
-      }`,
-      textSideW: `⛉${player.kifu.header.後手 || player.kifu.header.上手 || ""}${
-        remainTimesW.length > 0
-          ? `; remain ${remainTimesW[remainTimesW.length - 1]}`
-          : ""
-      }`,
+      textSideB: `☗${
+        player.kifu.header.先手 || player.kifu.header.下手 || ""
+      }; remain ${remainTimeB}`,
+      textSideW: `⛉${
+        player.kifu.header.後手 || player.kifu.header.上手 || ""
+      }; remain ${remainTimeW}`,
       plyCallback: (ply: number): void => {
         this.tesuuChange(ply);
       },
