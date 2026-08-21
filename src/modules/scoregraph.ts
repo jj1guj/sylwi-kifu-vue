@@ -1512,7 +1512,7 @@ const doWrite = (p: Partial<SvgScoreGraphProp>): VNode =>
         textSideW: "",
         caption: "",
         capLink: "",
-        plyCallback: () => {},  
+        plyCallback: () => {},
       },
       p
     )
