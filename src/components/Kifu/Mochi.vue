@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent, VNode, h, SetupContext } from "vue";
-import { Piece, Color } from "shogi.js";
+import { Piece, Color, Shogi } from "shogi.js";
 import { JKFPlayer } from "json-kifu-format";
 import { getUrl } from "@/assets/pieces/PieceImage";
+
+type HandKind = keyof ReturnType<Shogi["getHandsSummary"]>;
 
 export default defineComponent({
   props: {
@@ -58,7 +60,7 @@ export default defineComponent({
           (player.tesuu > 1 ? player.getMove(player.tesuu - 2) : undefined)
         : undefined);
     const handPieces = (
-      kind: string,
+      kind: HandKind,
       color: number,
       side: number
     ): VNode | null => {
@@ -132,10 +134,10 @@ export default defineComponent({
       ((c: Color) => {
         const hands = player.shogi.getHandsSummary(c);
         let p = 0;
-        ["FU", "KY", "KE", "GI", "KI"].forEach((kind) => {
+        (["FU", "KY", "KE", "GI", "KI"] as HandKind[]).forEach((kind) => {
           p += hands[kind];
         });
-        ["KA", "HI"].forEach((kind) => {
+        (["KA", "HI"] as HandKind[]).forEach((kind) => {
           p += hands[kind] * 5;
         });
         return p;
@@ -232,10 +234,10 @@ export default defineComponent({
         h(
           "div",
           { className: "mochimain" },
-          [
+          ([
             ["HI", "KA", "KI", "GI", "KE", "KY", "FU"],
             ["FU", "KY", "KE", "GI", "KI", "KA", "HI"],
-          ][side]
+          ] as HandKind[][])[side]
             .map((kind) => handPieces(kind, color, side))
             .reduce((p, c) => (c ? [...p, c] : p), [] as VNode[])
         ),

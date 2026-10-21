@@ -1,5 +1,6 @@
 import { Shogi, Color, Piece } from "shogi.js";
-import { IMoveMoveFormat } from "json-kifu-format/dist/src/Formats";
+import { IStateFormat, IMoveMoveFormat } from "json-kifu-format/dist/src/Formats";
+import { Kind } from "shogi.js/dist/src/Kind";
 
 // TypeScriptでの psfenw (PackedSfenWeb-base64url) エンコーダ/デコーダ実装例
 // PHPでのデコーダ実装例は public/psfenw.php
@@ -343,6 +344,31 @@ padding文字 `=` は使用しない実装を予定。
 
 */
 
+type HandKind = keyof IStateFormat["hands"][number];
+
+const isKind = (value: string): value is Kind =>
+  [
+    "FU",
+    "KY",
+    "KE",
+    "GI",
+    "KI",
+    "KA",
+    "HI",
+    "OU",
+    "TO",
+    "NY",
+    "NK",
+    "NG",
+    "UM",
+    "RY",
+  ].some((kind) => kind === value);
+
+const isHandKind = (value: string): value is HandKind =>
+  ["FU", "KY", "KE", "GI", "KI", "KA", "HI"].some(
+    (kind) => kind === value
+  );
+
 // 1語8ビット長以下のハフマン符号列を扱うクラス
 export class Huffman {
   public data: number[];
@@ -485,7 +511,7 @@ const tHuffmanBox: {
 };
 
 // 持駒・駒箱の駒処理順
-const pOrder = ["HI", "KA", "KI", "GI", "KE", "KY", "FU"];
+const pOrder: HandKind[] = ["HI", "KA", "KI", "GI", "KE", "KY", "FU"];
 
 // packedsfenweb
 export const toPackedSfenWeb = (
@@ -754,16 +780,7 @@ const tDeHuffmanHand = [
 export const fromPackedSfenWeb = (
   h: Huffman
 ): { shogi: Shogi; move?: IMoveMoveFormat; tesuu: number } => {
-  const data: {
-    color: Color;
-    board: {
-      color?: Color;
-      kind?: string;
-    }[][];
-    hands: {
-      [index: string]: number;
-    }[];
-  } = {
+  const data: IStateFormat = {
     color: Color.Black,
     board: Array.from({ length: 9 }, () =>
       Array.from({ length: 9 }, () => ({}))
@@ -798,6 +815,9 @@ export const fromPackedSfenWeb = (
     if (data.board[pos.f][pos.r]?.kind !== "OU") {
       const dec = tDeHuffmanPiece[h.getByteValue(bitpos)];
       if (dec.c >= 0) {
+        if (!isKind(dec.q)) {
+          throw `invalid piece kind:${dec.q}`;
+        }
         data.board[pos.f][pos.r] = { color: dec.c, kind: dec.q };
       }
       bitpos += dec.l;
@@ -806,8 +826,10 @@ export const fromPackedSfenWeb = (
   // 持駒・駒箱デコード
   while (bitpos < 256) {
     const dec = tDeHuffmanHand[h.getByteValue(bitpos)];
-    if (dec.r === 0) {
+    if (dec.r === 0 && isHandKind(dec.q)) {
       data.hands[dec.c][dec.q] += 1;
+    } else if (dec.r === 0) {
+      throw `invalid hand kind:${dec.q}`;
     } else {
       if (dec.c === 0 || dec.q === "NG") {
         //
@@ -822,10 +844,19 @@ export const fromPackedSfenWeb = (
     throw `decoding invalid bitpos:${bitpos}`;
   }
   // 指し手
-  const move: IMoveMoveFormat = {
+  const move: Partial<IMoveMoveFormat> & { color: Color } = {
     color: Color.Black,
-    piece: "",
   };
+  const moveKinds: Kind[] = [
+    "OU",
+    "FU",
+    "KY",
+    "KE",
+    "GI",
+    "KI",
+    "KA",
+    "HI",
+  ];
   if (h.getBitLength() >= bitpos + 26) {
     move.color = h.getByteValue(bitpos) < 0x80 ? Color.Black : Color.White;
     const mFrom = h.getByteValue(bitpos) & 0x7f;
@@ -839,7 +870,7 @@ export const fromPackedSfenWeb = (
           move.piece = move.promote ? Piece.unpromote(pTo.kind) : pTo.kind;
         }
       } else {
-        move.piece = ["OU", "FU", "KY", "KE", "GI", "KI", "KA", "HI"][mTo & 7];
+        move.piece = moveKinds[mTo & 7];
       }
       if (mFrom < 81) {
         move.from = { x: (mFrom / 9 + 1) | 0, y: (mFrom % 9) + 1 };
@@ -848,9 +879,7 @@ export const fromPackedSfenWeb = (
           move.piece = pFrom.kind;
         }
       } else {
-        move.piece = ["OU", "FU", "KY", "KE", "GI", "KI", "KA", "HI"][
-          mFrom & 7
-        ];
+        move.piece = moveKinds[mFrom & 7];
       }
     }
     move.same = (h.getByteValue(bitpos + 9) & 1) === 1 || undefined;
@@ -872,7 +901,7 @@ export const fromPackedSfenWeb = (
       "CD",
       "RD",
     ][h.getByteValue(bitpos + 14) & 15];
-    move.capture = [
+    const captureKinds: (Kind | undefined)[] = [
       undefined,
       "FU",
       "KY",
@@ -889,7 +918,8 @@ export const fromPackedSfenWeb = (
       undefined,
       "UM",
       "RY",
-    ][h.getByteValue(bitpos + 18) & 15];
+    ];
+    move.capture = captureKinds[h.getByteValue(bitpos + 18) & 15];
     bitpos += 26;
   }
   // 手数
@@ -905,13 +935,16 @@ export const fromPackedSfenWeb = (
       bitpos += 6;
     }
   }
+  const decodedMove: IMoveMoveFormat | undefined = move.piece
+    ? { ...move, piece: move.piece }
+    : undefined;
   // 出力
   return {
     shogi: new Shogi({
       preset: "OTHER",
       data,
     }),
-    move: move.piece ? move : undefined,
+    move: decodedMove,
     tesuu,
   };
 };

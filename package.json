@@ -26,6 +26,18 @@
     "vue-router": "^4.6.4",
     "vuex": "^4.1.0"
   },
+  "resolutions": {
+    "lodash": "^4.18.1",
+    "path-parse": "^1.0.7",
+    "minimist": "^1.2.6",
+    "braces": "^3.0.3",
+    "license-checker/**/hosted-git-info": "^2.8.9",
+    "license-checker/**/minimatch": "^3.1.5",
+    "license-checker/**/semver": "^5.7.2",
+    "ts-node/diff": "^4.0.4",
+    "vite-plugin-static-copy/**/picomatch": "^2.3.2",
+    "eslint/**/js-yaml": "^4.3.2"
+  },
   "devDependencies": {
     "@gfx/zopfli": "^1.0.15",
     "@types/express": "^5.0.6",
@@ -36,10 +48,11 @@
     "@vue/compiler-sfc": "^3.5.40",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^14.9.0",
+    "brace-expansion": "^1.1.21",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^4.2.5",
-    "eslint-plugin-vue": "^9.28.0",
+    "eslint-plugin-vue": "^10.11.1",
     "license-checker": "^25.0.1",
     "prettier": "^2.8.8",
     "sass": "^1.101.0",
@@ -48,6 +61,7 @@
     "typescript": "6.0.3",
     "vite": "^8.1.5",
     "vite-plugin-static-copy": "^4.1.1",
+    "vue-eslint-parser": "^10.4.0",
     "vue-tsc": "3.3.7"
   }
 }

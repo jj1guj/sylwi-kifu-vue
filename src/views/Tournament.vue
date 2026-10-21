@@ -212,8 +212,8 @@
 import { defineComponent, reactive, computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
-import iconSearchRaw from "@tabler/icons/icons/search.svg?raw";
-import iconXRaw from "@tabler/icons/icons/x.svg?raw";
+import iconSearchRaw from "@tabler/icons/search.svg?raw";
+import iconXRaw from "@tabler/icons/x.svg?raw";
 import GameSelect from "@/components/GameSelect.vue";
 import GameFlex from "@/components/GameFlex.vue";
 import GameList from "@/components/GameList.vue";
