@@ -4,6 +4,7 @@ on:
   push:
     branches: [jj1guj_develop]
     tags: ["v*"]
+  workflow_dispatch:
 
 env:
   IMAGE_NAME: ${{ github.repository }}
