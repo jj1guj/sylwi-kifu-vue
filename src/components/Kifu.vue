@@ -465,18 +465,26 @@ div.kifu {
       }
       .ban {
         display: table;
-        border-collapse: collapse;
+        border-collapse: separate;
+        border-spacing: 0;
         .rank {
           display: table-row;
           flex-direction: row;
         }
         .square {
           display: table-cell;
-          border: 1px #000 solid;
+          border-right: var(--ban-line, 1px) #000 solid;
+          border-bottom: var(--ban-line, 1px) #000 solid;
           border-spacing: 0;
           padding: 0;
           text-align: center;
           vertical-align: middle;
+        }
+        .rank:nth-child(2) .square {
+          border-top: var(--ban-line, 1px) #000 solid;
+        }
+        .square:first-child {
+          border-left: var(--ban-line, 1px) #000 solid;
         }
         .square,
         .square div,
@@ -571,6 +579,7 @@ div.kifu {
   div.kifu {
     width: 100%;
     container-type: inline-size;
+    --ban-line: 1.5px;
 
     > * {
       width: 570px;
@@ -582,6 +591,7 @@ div.kifu {
 @media (orientation: landscape) and (max-height: 430px) {
   .single > div.kifu {
     zoom: min(1, calc((100dvh - 75px) / 590px));
+    --ban-line: 1.5px;
   }
 }
 </style>
